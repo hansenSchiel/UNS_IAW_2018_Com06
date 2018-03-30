@@ -1,0 +1,19 @@
+{
+"equipos":[
+
+
+],
+
+
+"torneos":[
+	{"id":"1234-5678-90ab",
+	"nombre": "Mundial Rusia 2018",
+	"fechaI": "14/06/18",
+	"fechaF": "14/07/18"},
+	{"id":"1234-5678-90ab",
+	"nombre": "Mundial Rusia 2018",
+	"fechaI": "14/06/18",
+	"fechaF": "14/07/18"},
+
+],
+}
