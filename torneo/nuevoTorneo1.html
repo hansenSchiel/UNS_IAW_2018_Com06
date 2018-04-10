@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prode IAW</title>
-	<!-- BOOTSTRAP STYLES-->
+    <!-- BOOTSTRAP STYLES-->
     <link href="/assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
     <link href="/assets/css/font-awesome.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
-    <link href="/assets/css/customB.css"  rel="stylesheet"           type="text/css" title="blue" />
-	<link href="/assets/css/customR.css" rel="alternate stylesheet" type="text/css" title="red" >
+    <link href="/assets/css/customB.css"  rel="stylesheet"           type="text/css"title="blue" />
+    <link href="/assets/css/customR.css" rel="alternate stylesheet" type="text/css" title="red" >
     <link href="/assets/css/customs.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
@@ -30,12 +30,12 @@
                     </button>
                     <a class="navbar-brand" href="#">
                         <img src="/assets/img/logo.png"/>
-						Prode IAW
+                        Prode IAW
                     </a>
                 </div>
                 <span class="logout-spn" >
-					<a href="#" style="color:#fff;">Usuario 1</a>   <a href="/readme.html">Ayuda</a> 
-					<h6>Logout</h6>
+                    <a href="#" style="color:#fff;">Usuario 1</a>   <a href="/readme.html">Ayuda</a> 
+                    <h6>Logout</h6>
                 </span>
             </div>
         </div>
@@ -43,9 +43,6 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <li>
-						<a href="#" onclick="switch_style()"><i class="fa fa-exchange "></i>Cambiar estilo</a>
-                    </li>
                     <li class="active-link">
                         <a href="/index.html" ><i class="fa fa-desktop "></i>Torneos <span class="badge">5</span></a>
                     </li>
@@ -59,73 +56,63 @@
                         <a href="/fecha/fechas.html"><i class="fa fa-edit "></i>Fechas<span class="badge">8</span></a>
                     </li>
                 </ul>
-			</div>
+            </div>
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
                     <div class="col-lg-12">
-						<h2>Torneos</h2>   
+                        <h2>Torneo</h2><h4>Nuevo Torneo (Paso 1)</h4>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
                  <hr />
-				<div class="row">
-					<div class="col-lg-4 col-md-4">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <a class="hlink" href="/torneo/torneo.html?id=1">Mundial Rusia 2018</a>
+                <div class="row">
+                    <form action="/torneo/nuevoTorneo2.html" method="post">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <h5>Nombre</h5>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Nombre">
                             </div>
-                            <div class="panel-body">
-                                Equipos: 32<br>
-                                Fecha Inicio/Fin: 14/06 17/07<br>
-                                Cant Grupos: 8<br>
-                                Fechas: 6<br>
-                                Mejor Usuario: Juan<br>
-                                Cant Encuentros: 38<br>
+                            <br>
+                            <h5>Deporte</h5>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Nombre">
                             </div>
-                            <div class="panel-footer">
-                                <a href="/fecha/fecha.html">Próxima Fecha: 16/06/18</a> (Participando)
+                            <br>
+                            <h5>Cantidad de Grupos</h5>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="8">
                             </div>
+                            <br>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <a class="hlink" href="/torneo/torneo.html?id=1">Torneo Amateur</a>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <h5>Fecha Inicio</h5>
+                            <div class="input-group">
+                                <input type="date" class="form-control">
                             </div>
-                            <div class="panel-body">
-                                Equipos: 8<br>
-                                Fecha Inicio/Fin: 14/06 17/07<br>
-                                Cant Grupos: 2<br>
-                                Fechas: 4<br>
-                                Mejor Usuario: Juan<br>
-                                Cant Encuentros: 12<br>
+                            <h5>Fecha Fin</h5>
+                            <div class="input-group">
+                                <input type="date" class="form-control">
                             </div>
-                            <div class="panel-footer">
-                                <a href="/fecha/fecha.html">Próxima Fecha: 13/05/18</a>
-								<a href="#" class="btn btn-primary">participar</a>
-                            </div>
+                            <h5>Fecha Fin</h5>
+                                <input type="submit" value="Siguiente" class="btn btn-primary">
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-                        <a href="/torneo/nuevoTorneo1.html" class="btn btn-primary">Nuevo Torneo</a>
-                    </div>
-				</div>
-			</div>
+                    </form>
+                </div>
+            </div>
              <!-- /. PAGE INNER  -->
-		</div>
+        </div>
          <!-- /. PAGE WRAPPER  -->
         </div>
     <div class="footer">
-		<div class="row">
-			<div class="col-lg-12" >
-				IAW - Schiel Juan Jose - LU: 94123 - Proyecto 1 - Comision 21
-			</div>
-		</div>
-	</div>
+        <div class="row">
+            <div class="col-lg-12" >
+                IAW - Schiel Juan Jose - LU: 94123 - Proyecto 1 - Comision 21
+            </div>
+        </div>
+    </div>
 
     <script src="/assets/js/jquery-1.10.2.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prode IAW</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="/assets/css/customB.css"  rel="stylesheet"           type="text/css"title="blue" />
+    <link href="/assets/css/customR.css" rel="alternate stylesheet" type="text/css" title="red" >
+    <link href="/assets/css/customs.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+     
+           
+          
+    <div id="wrapper">
+         <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="/assets/img/logo.png"/>
+                        Prode IAW
+                    </a>
+                </div>
+                <span class="logout-spn" >
+                    <a href="#" style="color:#fff;">Usuario 1</a>   <a href="/readme.html">Ayuda</a> 
+                    <h6>Logout</h6>
+                </span>
+            </div>
+        </div>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="active-link">
+                        <a href="/index.html" ><i class="fa fa-desktop "></i>Torneos <span class="badge">5</span></a>
+                    </li>
+                    <li>
+                        <a href="/equipo/equipos.html"><i class="fa fa-table "></i>Equipos<span class="badge">5</span></a>
+                    </li>
+                    <li>
+                        <a href="/usuario/usuarios.html"><i class="fa fa-edit "></i>Usuarios<span class="badge">8</span></a>
+                    </li>
+                    <li>
+                        <a href="/fecha/fechas.html"><i class="fa fa-edit "></i>Fechas<span class="badge">8</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Torneo</h2><h4>Nuevo Torneo (Paso 2)</h4>   
+                    </div>
+                </div>              
+                 <!-- /. ROW  -->
+                 <hr />
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h5>Grupos</h5>
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseA" class="">Grupo "A"</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseA" class="panel-collapse collapse in" style="height: auto;">
+                                    <div class="panel-body">
+                                        <fieldset class="form-group">
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="1">Rusia
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="2">Chile
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="3">España
+                                            </label></div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseB" class="collapsed">Grupo "B"</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseB" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <fieldset class="form-group">
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="1">Estados Unidos
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="2">Italia
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="3">Portugal
+                                            </label></div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseC" class="collapsed">Grupo "C"</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseC" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <fieldset class="form-group">
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="1">Albania
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="2">Noruega
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="3">Venezuela
+                                            </label></div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseD" class="collapsed">Grupo "D"</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseD" class="panel-collapse collapse" style="height: 0px;">
+                                    <div class="panel-body">
+                                        <fieldset class="form-group">
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="1">China
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="2">Turkia
+                                            </label></div>
+                                            <div class="form-check"><label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optionsEquipos" value="3">Madagascar
+                                            </label></div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>                              
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="#" class="btn btn-primary">>></a><br><br>
+                        <a href="#" class="btn btn-primary"><<</a><br><br>
+                        <a href="/torneo/nuevoTorneo3.html" class="btn btn-primary">Siguiente</a>
+                    </div>
+                    <div class="col-xs-4">
+                        <h5>Equipos</h5>
+                        <fieldset class="form-group">
+                            <div class="form-check"><label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optionsEquipos" id="optionsEquipos" value="1">Argentina
+                            </label></div>
+                            <div class="form-check"><label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optionsEquipos" id="optionsEquipos" value="2">Alemania
+                            </label></div>
+                            <div class="form-check"><label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optionsEquipos" id="optionsEquipos" value="3">Inglaterra
+                            </label></div>
+                            <div class="form-check"><label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optionsEquipos" id="optionsEquipos" value="1">Arabia Saudita
+                            </label></div>
+                            <div class="form-check"><label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optionsEquipos" id="optionsEquipos" value="1">Holanda
+                            </label></div>
+                            <div class="form-check"><label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optionsEquipos" id="optionsEquipos" value="1">Islandia
+                            </label></div>
+                            <div class="form-check"><label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optionsEquipos" id="optionsEquipos" value="1">Peru
+                            </label></div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+             <!-- /. PAGE INNER  -->
+        </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-lg-12" >
+                IAW - Schiel Juan Jose - LU: 94123 - Proyecto 1 - Comision 21
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/jquery-1.10.2.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/customs.js"></script>
+</body>
+</html>
