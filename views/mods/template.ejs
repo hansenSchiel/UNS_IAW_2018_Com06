@@ -1,0 +1,28 @@
+<%- include('header') %>
+
+<div id="wrapper">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="adjust-nav">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img src="/assets/img/logo.png"/>
+				Prode IAW
+            </a>
+        </div>
+        <span class="logout-spn" >
+			<a href="#" style="color:#fff;">Usuario 1</a>   <a href="/readme.html">Ayuda</a> 
+			<h6>Logout</h6>
+        </span>
+    </div>
+</div>
+<!-- /. NAV TOP  -->
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <%- include('menu') %>
+	</div>
+</nav>
