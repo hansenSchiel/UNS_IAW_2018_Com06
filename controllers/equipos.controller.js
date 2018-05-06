@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 var equiposervice = require('services/equipo.service');
 
-
 // routes
 router.get('/', getAll);
 router.post('/register', register);
@@ -18,7 +17,7 @@ module.exports = router;
  * Function to get all equipos
  */
 function getAll(req, res) {
-	res.render("equipo/equipos.ejs");
+	res.render("equipo/equipos.ejs",{"page":"equipo"});
 }
 
 /**

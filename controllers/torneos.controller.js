@@ -18,7 +18,7 @@ module.exports = router;
  * Function to get all torneos
  */
 function getAll(req, res) {
-	res.render("torneo/torneos.ejs");
+	res.render("torneo/torneos.ejs",{"page":"torneo"});
 }
 
 /**
