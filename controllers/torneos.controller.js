@@ -25,17 +25,7 @@ function getAll(req, res) {
  * Function to get current torneo
  */
 function getCurrent(req, res) {
-	torneoService.getById(req.params.id)
-		.then(function (torneo) {
-			if (torneo) {
-				res.send(torneo);
-			} else {
-					res.sendStatus(404);
-			}
-		})
-		.catch(function (err) {
-			res.status(400).send(err);
-		});
+	res.render("torneo/torneo.ejs",{"page":"torneo"});
 }
 
 /**
