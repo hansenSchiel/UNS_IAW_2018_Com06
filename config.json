@@ -1,5 +1,5 @@
 {
-    "connectionString": "mongodb://localhost:27017/iaw-jjs",
-    "apiUrl": "http://localhost:3000/api",
+    "connectionString": "mongodb://localhost:27017/iaw",
+    "apiUrl": "http://localhost:3000",
     "secret": "hansen"
 }

@@ -18,7 +18,13 @@ module.exports = router;
  * Function to get all torneos
  */
 function getAll(req, res) {
-	res.render("torneo/torneos.ejs");
+	torneoService.getAll()
+		.then(function (torneos) {
+			res.send(torneos);
+		})
+		.catch(function (err) {
+			res.status(400).send(err);
+		});
 }
 
 /**

@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 // routes
 app.use('/torneos', require('./controllers/torneos.controller'));
+app.use('/api/torneos', require('./controllers/api/api.torneos.controller'));
 //app.use('/equipos', require('./controllers/equipos.controller'));
 
 
@@ -26,7 +27,8 @@ app.use('/torneos', require('./controllers/torneos.controller'));
 app.get('/', function (req, res) {
     return res.redirect('/torneos');
 });
+
 // start server
-var port = process.env.NODE_ENV === 'production' ? 80 : 4000;
+var port = process.env.NODE_ENV === 'production' ? 80 : 3000;
 var server = app.listen(port, function () {
 });
