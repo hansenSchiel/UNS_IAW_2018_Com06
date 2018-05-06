@@ -4,6 +4,7 @@ var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var Q = require('q');
+var ObjectId = require('mongodb').ObjectID;
 
 // BD
 var mongo = require('mongoskin');
@@ -15,6 +16,7 @@ var service = {};
 service.getAll = getAll;
 service.getById = getById;
 service.create = create;
+service.getCreando = getCreando;
 service.delete = _delete;
 
 // Exports
@@ -28,8 +30,8 @@ function getAll() {
 	db.torneos.find().toArray(function (err, torneos) {
 		if (err) deferred.reject(err.name + ': ' + err.message);
 		// return torneos (without hashed passwords)
-		torneos = _.map(torneos, function (movie) {
-			return _.omit(movie, 'hash');
+		torneos = _.map(torneos, function (torneo) {
+			return _.omit(torneo, 'hash');
 		});
 		deferred.resolve(torneos);
 	});
@@ -37,17 +39,17 @@ function getAll() {
 }
 
 /**
- * Function to get at movie from the DB
+ * Function to get at torneo from the DB
  */
 function getById(_id) {
 	var deferred = Q.defer();
-	db.torneos.findById(_id, function (err, movie) {
+	db.torneos.findById(_id, function (err, torneo) {
 		if (err) deferred.reject(err.name + ': ' + err.message);
-		if (movie) {
-			// return movie (without hashed password)
-			deferred.resolve(_.omit(movie, 'hash'));
+		if (torneo) {
+			// return torneo (without hashed password)
+			deferred.resolve(_.omit(torneo, 'hash'));
 		} else {
-			// movie not found
+			// torneo not found
 			deferred.resolve();
 		}
 	});
@@ -55,37 +57,63 @@ function getById(_id) {
 }
 
 /**
- * Function to get add movie to DB
+ * Function to get at torneo from the DB
  */
-function create(movieParam) {
+function getCreando() {
+	var deferred = Q.defer();
+	db.torneos.findOne({creando:true}, function (err, torneo) {
+		if (err) deferred.reject(err.name + ': ' + err.message);
+		if (torneo) {
+			deferred.resolve(torneo);
+		} else {
+			deferred.resolve();
+		}
+	});
+	return deferred.promise;
+}
+/**
+ * Function to get add torneo to DB
+ */
+function create(torneoParam) {
 	var deferred = Q.defer();
 	// validation
-	db.torneos.findOne(
-		{ title: movieParam.title },
-		function (err, movie) {
+	torneoParam._id
+	db.torneos.findById(
+		torneoParam._id,
+		function (err, torneo) {
 			if (err) deferred.reject(err.name + ': ' + err.message);
-			if (movie) {
-					// title already exists
-					deferred.reject('La pelicula "' + movieParam.title + '" ya fue agregada');
+			if (torneo) {
+					updatetorneo();
 			} else {
-					createmovie();
+					createtorneo();
 				}
 		}
 	);
 
-	function createmovie() {
+	function createtorneo() {
 		db.torneos.insert(
-		movieParam,
-		function (err, doc) {
-			if (err) deferred.reject(err.title + ': ' + err.message);
-			deferred.resolve();
+			torneoParam,
+			function (err, doc) {
+				if (err) deferred.reject(err.title + ': ' + err.message);
+				deferred.resolve();
+		});
+	}
+
+	function updatetorneo() {
+		var idT = torneoParam._id;
+		delete torneoParam._id;
+		db.torneos.update({_id: ObjectId(idT)},
+			{$set:torneoParam},{},
+			function (err, doc) {
+				if (err) deferred.reject(err.title + ': ' + err.message);
+				deferred.resolve();
 		});
 	}
 	return deferred.promise;
 }
 
 /**
- * Function to delete movie from the DB
+ * Function to delete torneo from the DB
  */
 function _delete(_id) {
 	var deferred = Q.defer();

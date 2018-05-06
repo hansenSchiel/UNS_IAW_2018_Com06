@@ -7,6 +7,7 @@ var torneoService = require('services/torneo.service');
 
 // routes
 router.get('/', getAll);
+router.get('/register', getCreando);
 router.post('/register', register);
 router.get('/:id', getCurrent);
 router.delete('/:_id', _delete);
@@ -45,12 +46,31 @@ function getCurrent(req, res) {
 }
 
 /**
+ * Function to get current torneo
+ */
+function getCreando(req, res) {
+	torneoService.getCreando()
+		.then(function (torneo) {
+			if (torneo) {
+				res.send(torneo);
+			} else {
+				res.send({});
+			}
+		})
+		.catch(function (err) {
+			res.status(400).send(err);
+		});
+}
+/**
  * Function to get add torneo
  */
 function register(req, res) {
 	torneoService.create(req.body)
-		.then(function () {
-			res.sendStatus(200);
+		.then(function (torneo) {
+			torneoService.getCreando()
+			.then(function(torneo){
+				res.status(200).send(torneo);
+			});
 		})
 		.catch(function (err) {
 			res.status(400).send(err);

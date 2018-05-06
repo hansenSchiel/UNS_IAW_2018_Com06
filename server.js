@@ -21,6 +21,7 @@ app.set('views', __dirname + '/views');
 app.use('/torneos', require('./controllers/torneos.controller'));
 app.use('/api/torneos', require('./controllers/api/api.torneos.controller'));
 
+
 app.use('/equipos', require('./controllers/equipos.controller'));
 app.use('/api/equipos', require('./controllers/api/api.equipos.controller'));
 

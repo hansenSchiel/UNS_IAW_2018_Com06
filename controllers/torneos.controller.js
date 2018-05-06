@@ -7,7 +7,7 @@ var torneoService = require('services/torneo.service');
 
 // routes
 router.get('/', getAll);
-router.post('/register', register);
+router.get('/register', register);
 router.get('/:id', getCurrent);
 router.delete('/:_id', _delete);
 
@@ -32,13 +32,7 @@ function getCurrent(req, res) {
  * Function to get add torneo
  */
 function register(req, res) {
-	torneoService.create(req.body)
-		.then(function () {
-			res.sendStatus(200);
-		})
-		.catch(function (err) {
-			res.status(400).send(err);
-		});
+	res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
 }
 
 /**

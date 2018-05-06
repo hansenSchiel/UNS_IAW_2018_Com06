@@ -1,0 +1,55 @@
+<%- include('../mods/template') %>
+<div id="page-wrapper" ng-app = "torneo" ng-controller = "NuevoTorneoController" >
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Torneo</h2><h4>Nuevo Torneo (Paso 1) - Datos Generales</h4>   
+            </div>
+        </div>              
+         <!-- /. ROW  -->
+         <hr />
+        <div class="row">
+            <form ng-submit="registerTorneo()">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <h5>Nombre</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control" required placeholder="Nombre" ng-model = "torneo.nombre">
+                    </div>
+                    <h5>Deporte</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control" required  placeholder="Deporte" ng-model = "torneo.deporte">
+                    </div>
+                    <h5>Cantidad de Grupos</h5>
+                    <div class="input-group">
+                    <select class="form-control" ng-model = "torneo.cantGrupos">
+                        <option selected value = 2>2</option>
+                        <option  value = 4>4</option>
+                        <option  value = 8>8</option>
+                        <option  value = 16>16</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <h5>Fecha Inicio</h5>
+                    <div class="input-group">
+                        <input type="date" class="form-control" required ng-model = "torneo.inicio">
+                    </div>
+                    <h5>Fecha Fin</h5>
+                    <div class="input-group">
+                        <input type="date" class="form-control" required ng-model = "torneo.fin">
+                    </div>
+                    <h5>Descripcion</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Descripcion" ng-model = "torneo.descripcion">
+                    </div>
+                    <br>
+                    <input type="submit" value="Siguiente" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+     <!-- /. PAGE INNER  -->
+</div>
+<%- include('../mods/footer') %>
+<script type="text/javascript" src="/torneo/torneo.js"></script>
+<script type="text/javascript" src="/torneo/torneosController.js"></script>
