@@ -17,7 +17,7 @@
             .success(function(data, status) {
                 $scope.torneo = data;
              })
-            .error(function(data, status) {
+            .error(function(data, status){
                 alert("Error");
             })
 		}

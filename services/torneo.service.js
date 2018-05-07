@@ -83,11 +83,7 @@ function create(torneoParam) {
 	);
 
 	function createtorneo() {
-		torneoParam.grupos = [];
-		var letras = ["A","B","C","D","E","F","H","I"];
-		for (i = 0; i < torneoParam.cantGrupos; i++) { 
-			torneoParam.grupos.push({nombre:letras[i]});
-		}
+		crearGrupos(torneoParam);
 		db.torneos.insert(
 			torneoParam,
 			function (err, doc) {
@@ -98,11 +94,10 @@ function create(torneoParam) {
 
 	function updatetorneo() {
 		if(torneoParam.cantGrupos && torneoParam.cantGrupos!=torneoParam.grupos.length){
-			torneoParam.grupos = [];
-			var letras = ["A","B","C","D","E","F","H","I"];
-			for (i = 0; i < torneoParam.cantGrupos; i++) { 
-				torneoParam.grupos.push({nombre:letras[i]});
-			}
+			crearGrupos(torneoParam);
+		}
+		if(torneoParam.creando == 2){
+			crearEncuentros(torneoParam);
 		}
 		var idT = torneoParam._id;
 		delete torneoParam._id;
@@ -114,6 +109,29 @@ function create(torneoParam) {
 		});
 	}
 	return deferred.promise;
+}
+
+
+function crearGrupos(torneo){
+	var letras = ["A","B","C","D","E","F","H","I"];
+	torneo.grupos = [];
+	for (i = 0; i < torneo.cantGrupos; i++) { 
+		torneo.grupos.push({nombre:letras[i]});
+	}
+}
+
+function crearEncuentros(torneo){
+	torneo.encuentros = [];
+	torneo.grupos.forEach(function(grupo){
+		grupo.equipos.forEach(function(equipo1,i){
+			grupo.equipos.forEach(function(equipo2,j){
+				if(i<j){
+					var encuentro = {fecha:1,local:equipo1,visitante:equipo2,grupo:grupo,dia:new Date(),puntosL:-1,puntosV:-1};
+					torneo.encuentros.push(encuentro);
+				}
+			})
+		})
+	})
 }
 
 /**

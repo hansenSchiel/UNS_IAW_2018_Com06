@@ -70,6 +70,9 @@ function register(req, res) {
 			torneoService.getCreando()
 			.then(function(torneo){
 				res.status(200).send(torneo);
+			})
+			.catch(function (err) {
+				res.status(200).send();
 			});
 		})
 		.catch(function (err) {
