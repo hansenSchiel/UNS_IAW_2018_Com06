@@ -122,11 +122,12 @@ function crearGrupos(torneo){
 
 function crearEncuentros(torneo){
 	torneo.encuentros = [];
+	var hoy = new Date( new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 	torneo.grupos.forEach(function(grupo){
 		grupo.equipos.forEach(function(equipo1,i){
 			grupo.equipos.forEach(function(equipo2,j){
 				if(i<j){
-					var encuentro = {fecha:1,local:equipo1,visitante:equipo2,grupo:grupo,dia:new Date(),puntosL:-1,puntosV:-1};
+					var encuentro = {fecha:1,local:equipo1,visitante:equipo2,grupo:grupo,dia:hoy,puntosL:-1,puntosV:-1};
 					torneo.encuentros.push(encuentro);
 				}
 			})

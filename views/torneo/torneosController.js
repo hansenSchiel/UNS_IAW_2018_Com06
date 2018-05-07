@@ -32,6 +32,9 @@
 	                $scope.torneo = data;
 	                $scope.torneo.inicio = new Date($scope.torneo.inicio);
 	                $scope.torneo.fin = new Date($scope.torneo.fin);
+	        		$($scope.torneo.encuentros).each(function(i,encu){
+        				encu.dia = new Date(encu.dia.split('T')[0]);
+	        		})
 	             })
 	            .error(function(data, status) {
 	                alert("Error");
@@ -53,6 +56,7 @@
             	})
 
             $scope.registerTorneo = function(num){
+            	console.log($scope.torneo);
             	$scope.torneo.creando=num;
 				var body = JSON.stringify($scope.torneo);
 	        	$http({method : 'POST',url : '/api/torneos/register',data:body})

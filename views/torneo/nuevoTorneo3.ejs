@@ -11,14 +11,15 @@
         <div class="row">
             <div class="col-xs-12">
                 <h5>Definicion de Fechas</h5>
+                <form ng-submit="registerTorneo(3)">
                 <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" ng-repeat="grupo in torneo.grupos track by $index">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseA" class="">Grupo "A"</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ grupo.nombre }}" class="">Grupo "{{ grupo.nombre }}"</a>
                             </h4>
                         </div>
-                        <div id="collapseA" class="panel-collapse collapse in" style="height: auto;">
+                        <div id="collapse{{ grupo.nombre }}" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
@@ -31,161 +32,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>Rusia</th>
+                                        <tr ng-repeat="encuentro in torneo.encuentros track by $index" ng-if="encuentro.grupo.nombre == grupo.nombre">
+                                            <th>{{ encuentro.local.nombre }}</th>
                                             <th>vs</th>
-                                            <th>Chile</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Rusia</th>
-                                            <th>vs</th>
-                                            <th>España</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>España</th>
-                                            <th>vs</th>
-                                            <th>Chile</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseB" class="collapsed">Grupo "B"</a>
-                            </h4>
-                        </div>
-                        <div id="collapseB" class="panel-collapse collapse" style="height: 0px;">
-                            <div class="panel-body">
-                               <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Local</th>
-                                            <th></th>
-                                            <th>Visitante</th>
-                                            <th>Dia</th>
-                                            <th>Fecha</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>Estados Unidos</th>
-                                            <th>vs</th>
-                                            <th>Italia</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Estados Unidos</th>
-                                            <th>vs</th>
-                                            <th>Portugal</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Italia</th>
-                                            <th>vs</th>
-                                            <th>Portugal</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseC" class="collapsed">Grupo "C"</a>
-                            </h4>
-                        </div>
-                        <div id="collapseC" class="panel-collapse collapse" style="height: 0px;">
-                            <div class="panel-body">
-                               <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Local</th>
-                                            <th></th>
-                                            <th>Visitante</th>
-                                            <th>Dia</th>
-                                            <th>Fecha</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>Estados Unidos</th>
-                                            <th>vs</th>
-                                            <th>Italia</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Estados Unidos</th>
-                                            <th>vs</th>
-                                            <th>Portugal</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Italia</th>
-                                            <th>vs</th>
-                                            <th>Portugal</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseD" class="collapsed">Grupo "D"</a>
-                            </h4>
-                        </div>
-                        <div id="collapseD" class="panel-collapse collapse" style="height: 0px;">
-                            <div class="panel-body">
-                               <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Local</th>
-                                            <th></th>
-                                            <th>Visitante</th>
-                                            <th>Dia</th>
-                                            <th>Fecha</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>Estados Unidos</th>
-                                            <th>vs</th>
-                                            <th>Italia</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Estados Unidos</th>
-                                            <th>vs</th>
-                                            <th>Portugal</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
-                                        </tr>
-                                        <tr>
-                                            <th>Italia</th>
-                                            <th>vs</th>
-                                            <th>Portugal</th>
-                                            <th><div class="form-group"><input type="date" class="form-control" value="2018-06-01"></div></th>
-                                            <th><div class="form-group"><input type="number" class="form-control" value="1"></div></th>
+                                            <th>{{ encuentro.visitante.nombre }}</th>
+                                            <th><div class="form-group"><input type="date" class="form-control" ng-model = "encuentro.dia" value="{{ encuentro.dia }}"></div></th>
+                                            <th><div class="form-group"><input type="number" class="form-control" ng-model = "encuentro.fecha" value="{{ encuentro.fecha }}"></div></th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -194,7 +46,8 @@
                     </div>
                 </div>
                 <a ng-click="registerTorneo(1)" class="btn btn-primary">Atras</a>
-                <a href="/torneo/nuevoTorneo4.html" class="btn btn-primary">Siguiente</a>
+                <input type="submit" value="Siguiente" class="btn btn-primary">
+                </form>
             </div>
         </div>
     </div>

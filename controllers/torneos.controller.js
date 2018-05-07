@@ -44,6 +44,9 @@ function register(req, res) {
 			if(torneo.creando==2){
 				res.render("torneo/nuevoTorneo3.ejs",{"page":"torneo"});
 			}
+			if(torneo.creando==3){
+				res.render("torneo/nuevoTorneo3.ejs",{"page":"torneo"});
+			}
 		}else{
 			res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
 		}
