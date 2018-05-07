@@ -32,7 +32,25 @@ function getCurrent(req, res) {
  * Function to get add torneo
  */
 function register(req, res) {
-	res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
+	var torneo = torneoService.getCreando()
+	.then(function (torneo) {
+		if (torneo){
+			if(torneo.creando==0){
+				res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
+			}
+			if(torneo.creando==1){
+				res.render("torneo/nuevoTorneo2.ejs",{"page":"torneo"});
+			}
+			if(torneo.creando==2){
+				res.render("torneo/nuevoTorneo3.ejs",{"page":"torneo"});
+			}
+		}else{
+			res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
+		}
+		})
+	.catch(function (err) {
+		res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
+	});
 }
 
 /**

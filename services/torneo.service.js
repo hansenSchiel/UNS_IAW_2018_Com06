@@ -29,10 +29,6 @@ function getAll() {
 	var deferred = Q.defer();
 	db.torneos.find().toArray(function (err, torneos) {
 		if (err) deferred.reject(err.name + ': ' + err.message);
-		// return torneos (without hashed passwords)
-		torneos = _.map(torneos, function (torneo) {
-			return _.omit(torneo, 'hash');
-		});
 		deferred.resolve(torneos);
 	});
 	return deferred.promise;
@@ -46,10 +42,8 @@ function getById(_id) {
 	db.torneos.findById(_id, function (err, torneo) {
 		if (err) deferred.reject(err.name + ': ' + err.message);
 		if (torneo) {
-			// return torneo (without hashed password)
-			deferred.resolve(_.omit(torneo, 'hash'));
+			deferred.resolve(torneo);
 		} else {
-			// torneo not found
 			deferred.resolve();
 		}
 	});
@@ -61,7 +55,7 @@ function getById(_id) {
  */
 function getCreando() {
 	var deferred = Q.defer();
-	db.torneos.findOne({creando:true}, function (err, torneo) {
+	db.torneos.findOne({ creando: { $gt: -1}}, function (err, torneo) {
 		if (err) deferred.reject(err.name + ': ' + err.message);
 		if (torneo) {
 			deferred.resolve(torneo);
@@ -76,8 +70,6 @@ function getCreando() {
  */
 function create(torneoParam) {
 	var deferred = Q.defer();
-	// validation
-	torneoParam._id
 	db.torneos.findById(
 		torneoParam._id,
 		function (err, torneo) {
@@ -91,6 +83,11 @@ function create(torneoParam) {
 	);
 
 	function createtorneo() {
+		torneoParam.grupos = [];
+		var letras = ["A","B","C","D","E","F","H","I"];
+		for (i = 0; i < torneoParam.cantGrupos; i++) { 
+			torneoParam.grupos.push({nombre:letras[i]});
+		}
 		db.torneos.insert(
 			torneoParam,
 			function (err, doc) {
@@ -100,6 +97,13 @@ function create(torneoParam) {
 	}
 
 	function updatetorneo() {
+		if(torneoParam.cantGrupos && torneoParam.cantGrupos!=torneoParam.grupos.length){
+			torneoParam.grupos = [];
+			var letras = ["A","B","C","D","E","F","H","I"];
+			for (i = 0; i < torneoParam.cantGrupos; i++) { 
+				torneoParam.grupos.push({nombre:letras[i]});
+			}
+		}
 		var idT = torneoParam._id;
 		delete torneoParam._id;
 		db.torneos.update({_id: ObjectId(idT)},
