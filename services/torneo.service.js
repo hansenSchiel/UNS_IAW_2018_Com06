@@ -99,6 +99,10 @@ function create(torneoParam) {
 		if(torneoParam.creando == 2){
 			crearEncuentros(torneoParam);
 		}
+		if(torneoParam.creando == 4){
+			crearFechas(torneoParam);
+			torneoParam.creando = -1;
+		}
 		var idT = torneoParam._id;
 		delete torneoParam._id;
 		db.torneos.update({_id: ObjectId(idT)},
@@ -133,6 +137,19 @@ function crearEncuentros(torneo){
 			})
 		})
 	})
+}
+
+function crearFechas(torneo){
+	torneo.fechas = [];
+	torneo.encuentros.forEach(function(encuentro){
+		if (torneo.fechas[encuentro.fecha]==undefined){
+			torneo.fechas[encuentro.fecha]={dia:new Date(3900,1,1),encuentros:[]};
+		}
+		torneo.fechas[encuentro.fecha].encuentros.push(encuentro);
+		if(new Date(torneo.fechas[encuentro.fecha].dia).getTime() > new Date(encuentro.dia).getTime()){
+			torneo.fechas[encuentro.fecha].dia = encuentro.dia;
+		}
+	});
 }
 
 /**
