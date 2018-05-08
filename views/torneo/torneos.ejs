@@ -16,20 +16,20 @@
                         </div>
                         <div class="panel-body">
                             Equipos: 32<br>
-                            Fecha Inicio/Fin: {{ torneo.fechaInicio }} {{ torneo.fechaFin }}<br>
+                            Fecha Inicio: {{ torneo.inicio | date:'dd/MM/yyyy'}}<br>
+                            Fecha Fin: {{ torneo.fin | date:'dd/MM/yyyy' }}<br>
                             Cant Grupos: {{ torneo.grupos.length }}<br>
-                            Fechas: 6<br>
+                            Fechas: {{ torneo.fechas.length }}<br>
                             Mejor Usuario: Juan<br>
-                            Cant Encuentros: 38<br>
-                        </div>
-                        <div class="panel-footer">
-                            <a href="/fecha/fecha.html">Próxima Fecha: 16/06/18</a> (Participando)
+                            Cant Encuentros: {{ torneo.encuentros.length }}<br>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4">
-                    <a href="/torneos/register" class="btn btn-primary">Nuevo Torneo</a>
-                </div>
+                <% if (locals.user) {  %>
+                    <div class="col-lg-4 col-md-4">
+                        <a href="/torneos/register" class="btn btn-primary">Nuevo Torneo</a>
+                    </div>
+                <% } %> 
             </div>
         </div>
          <!-- /. PAGE INNER  -->
