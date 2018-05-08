@@ -12,7 +12,7 @@
                 <div class="col-lg-4 col-md-4" ng-repeat="torneo in torneos">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <a class="hlink" href="/torneos/{{ torneo._id }}">{{ torneo.nombre }}</a>
+                            <a class="hlink" href="/torneos/{{ torneo._id }}">{{ torneo.nombre }} <span ng-show="torneo.creando>0"> (En Edicion)</span></a>
                         </div>
                         <div class="panel-body">
                             Equipos: 32<br>

@@ -69,6 +69,19 @@
         		$scope.ultimaFecha.fin = new Date(new Date($scope.ultimaFecha.dia)-1000*60*60*24);
         		$scope.ultimaFecha.inicio = new Date(new Date($scope.ultimaFecha.dia)-1000*60*60*24*30);
             }
+            $scope.registerTorneo = function(num){
+            	$scope.torneo.creando=num;
+				var body = JSON.stringify($scope.torneo);
+	        	$http({method : 'POST',url : '/api/torneos/register',data:body})
+	            .success(function(data, status) {
+	                $scope.torneo.inicio = new Date($scope.torneo.inicio);
+	                $scope.torneo.fin = new Date($scope.torneo.fin);
+	                window.location.replace("/torneos/register");
+	             })
+	            .error(function(data, status) {
+	                alert("Error");
+	            })
+            }
 		}
 	);
 

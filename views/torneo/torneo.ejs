@@ -4,7 +4,10 @@
 <div id="page-inner">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Torneo</h2><h4>{{ torneo.nombre }}</h4>   
+            <h2>Torneo</h2><h4>{{ torneo.nombre }}  <span ng-show="torneo.creando>0"> En Edicion</span></h4>                       
+            <% if (locals.user) {  %>
+                <a ng-click="registerTorneo(3)" class="btn btn-primary">Editar</a>
+            <% } %> 
         </div>
     </div>              
      <!-- /. ROW  -->
@@ -64,7 +67,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="encuentro in proximaFecha.encuentros">
+                                <tr ng-repeat="encuentro in proximaFecha.encuentros  track by $index">
                                     <td>1</td>
                                     <td>{{ encuentro.local.nombre }}</td>
                                     <td>vs</td>
@@ -121,7 +124,7 @@
         <div class="col-lg-4 col-md-4">
             <h5>Grupos y Equipos</h5>
             <div class="panel-group" id="accordion">
-                <div class="panel panel-default" ng-repeat="grupo in torneo.grupos">
+                <div class="panel panel-default" ng-repeat="grupo in torneo.grupos  track by $index">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ grupo.nombre }}" class="collapsed">Grupo "{{ grupo.nombre }}"</a>
@@ -141,7 +144,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="equipo in grupo.equipos">
+                                    <tr ng-repeat="equipo in grupo.equipos  track by $index">
                                         <td>1</td>
                                         <td><a href="/equipo/equipo.html">{{ equipo.nombre }}</a></td>
                                         <td>0</td>
@@ -189,7 +192,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="encuentro in proximaFecha.encuentros">
+                                <tr ng-repeat="encuentro in proximaFecha.encuentros  track by $index">
                                     <td>1</td>
                                     <td>{{ encuentro.local.nombre }}</td>
                                     <td>{{ encuentro.puntosL }}</td>
