@@ -15,8 +15,14 @@
             </a>
         </div>
         <span class="logout-spn" >
-			<a href="#" style="color:#fff;">Usuario 1</a>   <a href="/readme.html">Ayuda</a> 
-			<h6>Logout</h6>
+            <% if (locals.user) {  %>
+                <img src="<%= user.photo %>"/>
+                <%= user.name %>
+            <% } else { %> 
+                <a href="./auth/twitter" style="color:#fff;"> Login </a>
+            <%}%> 
+            <a href="/readme">Readme</a> 
+			<a href="./logout"><h6>Logout</h6></a> 
         </span>
     </div>
 </div>

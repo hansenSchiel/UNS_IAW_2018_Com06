@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var torneoService = require('services/torneo.service');
 
+var passport = require('passport');
 
 // routes
 router.get('/', getAll);
@@ -18,14 +19,14 @@ module.exports = router;
  * Function to get all torneos
  */
 function getAll(req, res) {
-	res.render("torneo/torneos.ejs",{"page":"torneo"});
+	res.render("torneo/torneos.ejs",{"user":req.user,"page":"torneo"});
 }
 
 /**
  * Function to get current torneo
  */
 function getCurrent(req, res) {
-	res.render("torneo/torneo.ejs",{"page":"torneo"});
+	res.render("torneo/torneo.ejs",{"user":req.user,"page":"torneo"});
 }
 
 /**
@@ -36,23 +37,23 @@ function register(req, res) {
 	.then(function (torneo) {
 		if (torneo){
 			if(torneo.creando==0){
-				res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
+				res.render("torneo/nuevoTorneo.ejs",{"user":req.user,"page":"torneo"});
 			}
 			if(torneo.creando==1){
-				res.render("torneo/nuevoTorneo2.ejs",{"page":"torneo"});
+				res.render("torneo/nuevoTorneo2.ejs",{"user":req.user,"page":"torneo"});
 			}
 			if(torneo.creando==2){
-				res.render("torneo/nuevoTorneo3.ejs",{"page":"torneo"});
+				res.render("torneo/nuevoTorneo3.ejs",{"user":req.user,"page":"torneo"});
 			}
 			if(torneo.creando==3){
-				res.render("torneo/nuevoTorneo3.ejs",{"page":"torneo"});
+				res.render("torneo/nuevoTorneo3.ejs",{"user":req.user,"page":"torneo"});
 			}
 		}else{
-			res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
+			res.render("torneo/nuevoTorneo.ejs",{"user":req.user,"page":"torneo"});
 		}
 		})
 	.catch(function (err) {
-		res.render("torneo/nuevoTorneo.ejs",{"page":"torneo"});
+		res.render("torneo/nuevoTorneo.ejs",{"user":req.user,"page":"torneo"});
 	});
 }
 

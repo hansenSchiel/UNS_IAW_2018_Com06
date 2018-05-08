@@ -17,7 +17,7 @@ module.exports = router;
  * Function to get all equipos
  */
 function getAll(req, res) {
-	res.render("equipo/equipos.ejs",{"page":"equipo"});
+	res.render("equipo/equipos.ejs",{"user":req.user,"page":"equipo"});
 }
 
 /**
