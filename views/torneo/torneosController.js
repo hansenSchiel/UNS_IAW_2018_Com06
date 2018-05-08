@@ -20,6 +20,55 @@
             .error(function(data, status){
                 alert("Error");
             })
+
+            $scope.getEquipos = function(){
+            	if($scope.torneo == undefined)return 0;
+            	toR = [];
+            	$($scope.torneo.grupos).each(function(i,grupo){
+            		$(grupo.equipos).each(function(i,equipo){
+            			toR.push(equipo);
+            		});
+        		});
+        		return toR;
+            }
+            $scope.getProximaFecha = function(){
+            	if($scope.torneo == undefined)return 0;
+            	$($scope.torneo.fechas).each(function(i,fecha){
+            		if(fecha === null){
+
+            		}else{
+	            		if($scope.proximaFecha == null && new Date()<new Date(fecha.dia)){
+	            			$scope.proximaFecha = fecha;
+	            			$scope.proximaFecha.nombre = i;
+	            		}
+	            		if($scope.ultimaFecha !== undefined && new Date($scope.ultimaFecha.dia)<new Date(fecha.dia)){
+	            			$scope.proximaFecha = fecha;
+	            			$scope.proximaFecha.nombre = i;
+	            		}
+            		}
+        		});
+        		$scope.proximaFecha.fin = new Date(new Date($scope.proximaFecha.dia)-1000*60*60*24);
+        		$scope.proximaFecha.inicio = new Date(new Date($scope.proximaFecha.dia)-1000*60*60*24*30);
+            }
+            $scope.getUltimaFecha = function(){
+            	if($scope.torneo == undefined)return 0;
+            	$($scope.torneo.fechas).each(function(i,fecha){
+            		if(fecha === null){
+
+            		}else{
+	            		if($scope.ultimaFecha == undefined && new Date()>new Date(fecha.dia)){
+	            			$scope.ultimaFecha = fecha;
+	            			$scope.ultimaFecha.nombre = i;
+	            		}
+	            		if($scope.ultimaFecha != undefined && new Date($scope.ultimaFecha.dia)>new Date(fecha.dia)){
+	            			$scope.ultimaFecha = fecha;
+	            			$scope.ultimaFecha.nombre = i;
+	            		}
+            		}
+        		});
+        		$scope.ultimaFecha.fin = new Date(new Date($scope.ultimaFecha.dia)-1000*60*60*24);
+        		$scope.ultimaFecha.inicio = new Date(new Date($scope.ultimaFecha.dia)-1000*60*60*24*30);
+            }
 		}
 	);
 
