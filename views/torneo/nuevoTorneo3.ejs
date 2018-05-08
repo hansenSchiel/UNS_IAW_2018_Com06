@@ -34,7 +34,9 @@
                                     <tbody>
                                         <tr ng-repeat="encuentro in torneo.encuentros track by $index" ng-if="encuentro.grupo.nombre == grupo.nombre">
                                             <th>{{ encuentro.local.nombre }}</th>
+                                            <th><div class="form-group"><input type="number" class="form-control" ng-model = "encuentro.puntosL" value="{{ encuentro.puntosL }}"></div></th>
                                             <th>vs</th>
+                                            <th><div class="form-group"><input type="number" class="form-control" ng-model = "encuentro.puntosV" value="{{ encuentro.puntosV }}"></div></th>
                                             <th>{{ encuentro.visitante.nombre }}</th>
                                             <th><div class="form-group"><input type="date" class="form-control" ng-model = "encuentro.dia" value="{{ encuentro.dia }}"></div></th>
                                             <th><div class="form-group"><input type="number" class="form-control" ng-model = "encuentro.fecha" value="{{ encuentro.fecha }}"></div></th>
