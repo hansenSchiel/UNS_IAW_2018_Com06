@@ -17,7 +17,7 @@
         <span class="logout-spn" >
             <% if (locals.user) {  %>
                 <img src="<%= user.photo %>"/>
-                <%= user.name %>
+                <a href="/pronosticos"><%= user.name %></a>
             <a href="/logout">Logout</a> 
             <% } else { %> 
                 <a href="/auth/twitter" style="color:#fff;"> Login </a>

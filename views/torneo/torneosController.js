@@ -82,12 +82,16 @@
 	                alert("Error");
 	            })
             }
-            $scope.participar = function(fecha){
-            	$(fecha.encuentros).each(function(i,encuentro){
-            		if(fecha.pronosticos = undefined){
-            			fecha.pronosticos = [];
-            		}
-            	})
+            $scope.participar = function(fecha,torneo){
+            	var body = {"fecha":fecha,"torneo":torneo};
+	        	$http({method : 'POST',url : '/api/pronosticos/register',data:body})
+	            .success(function(data, status) {
+	            	console.log(data);
+	                window.location.replace("/pronosticos");
+	             })
+	            .error(function(data, status) {
+	                alert("Error");
+	            })
             }
 		}
 	);
