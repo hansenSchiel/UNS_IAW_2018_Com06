@@ -9,20 +9,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/readme">
                 <img src="/assets/img/logo.png"/>
-				Prode IAW
+				Prode IAW (Readme)
             </a>
         </div>
         <span class="logout-spn" >
             <% if (locals.user) {  %>
                 <img src="<%= user.photo %>"/>
                 <%= user.name %>
+            <a href="/logout">Logout</a> 
             <% } else { %> 
                 <a href="/auth/twitter" style="color:#fff;"> Login </a>
-            <%}%> 
-            <a href="/readme">Readme</a> 
-			<a href="/logout"><h6>Logout</h6></a> 
+            <%}%> <h6> 
         </span>
     </div>
 </div>

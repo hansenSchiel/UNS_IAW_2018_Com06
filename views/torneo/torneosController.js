@@ -82,6 +82,13 @@
 	                alert("Error");
 	            })
             }
+            $scope.participar = function(fecha){
+            	$(fecha.encuentros).each(function(i,encuentro){
+            		if(fecha.pronosticos = undefined){
+            			fecha.pronosticos = [];
+            		}
+            	})
+            }
 		}
 	);
 

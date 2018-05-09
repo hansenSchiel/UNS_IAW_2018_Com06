@@ -1,9 +1,21 @@
 
+<%- include('mods/template') %>
+<div id="page-wrapper" ng-app = "torneo" ng-controller = "TorneoController" >
+	<div id="page-inner">
+<p>
+	Se modificó la estructura de la base de datos:<br>
+		Se remodeló para adaptarse al formato JSON ofrecido por MongoDB.
+</p>
+<p>
+	Se utilizó una 
+	<a href="https://carlosazaustre.es/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/" target="_blank">guía </a>
+	para implementar la registración y login mediante twitter<br>
+	
 
-
-Se modificó la estructura de la base de datos
-	No se utilizará una colección para "grupos". Los grupos (junto con la asociacion de estos con equipos) se encuentran dentro de la colección de torneos
-
-
-Guia para autenticacion
-https://carlosazaustre.es/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/
+	Se evitó utilizar login por facebook dado que requiere utilizar un servidor con https.
+</p><p>
+	Se acotaron algunas funcionalidades por la falta de tiempo para implementarlas.
+</p>
+</div>
+</div>
+<%- include('mods/footer') %>

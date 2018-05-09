@@ -58,6 +58,7 @@ app.use('/api/equipos', require('./controllers/api/api.equipos.controller'));
 
 
 
+app.use('/readme', require('./controllers/readme.controller'));
 
 app.get('/logout', function(req, res) {
   req.logout();
