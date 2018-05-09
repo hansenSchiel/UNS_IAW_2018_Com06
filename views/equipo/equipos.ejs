@@ -37,6 +37,11 @@
 						</tr>
 					</tbody>
 				</table>
+
+				<form ng-submit="addEquipo()">
+					<input type="text" class="form-control" required  placeholder="Deporte" ng-model = "equipo.nombre">
+					<input type="submit" value="Crear" class="btn btn-primary">
+				</form>
 			</div>
 		</div>
 	</div>

@@ -57,6 +57,10 @@ app.use('/equipos', require('./controllers/equipos.controller'));
 app.use('/api/equipos', require('./controllers/api/api.equipos.controller'));
 
 
+app.use('/pronosticos', require('./controllers/pronostico.controller'));
+app.use('/api/pronosticos', require('./controllers/api/api.pronostico.controller'));
+
+
 
 app.use('/readme', require('./controllers/readme.controller'));
 

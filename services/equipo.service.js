@@ -20,9 +20,6 @@ service.delete = _delete;
 // Exports
 module.exports = service;
 
-/**
- * Function to get all equipos from the DB
- */
 function getAll() {
 	var deferred = Q.defer();
 	db.equipos.find().toArray(function (err, equipos) {
@@ -36,9 +33,6 @@ function getAll() {
 	return deferred.promise;
 }
 
-/**
- * Function to get at movie from the DB
- */
 function getById(_id) {
 	var deferred = Q.defer();
 	db.equipos.findById(_id, function (err, movie) {
@@ -54,28 +48,25 @@ function getById(_id) {
 	return deferred.promise;
 }
 
-/**
- * Function to get add movie to DB
- */
-function create(movieParam) {
+function create(equipo) {
 	var deferred = Q.defer();
 	// validation
 	db.equipos.findOne(
-		{ title: movieParam.title },
+		{ nombre: equipo.nombre },
 		function (err, movie) {
 			if (err) deferred.reject(err.name + ': ' + err.message);
 			if (movie) {
 					// title already exists
-					deferred.reject('La pelicula "' + movieParam.title + '" ya fue agregada');
+					deferred.reject('El equipo "' + equipo.nombre + '" ya existe');
 			} else {
-					createmovie();
+					createequipo();
 				}
 		}
 	);
 
-	function createmovie() {
+	function createequipo() {
 		db.equipos.insert(
-		movieParam,
+		equipo,
 		function (err, doc) {
 			if (err) deferred.reject(err.title + ': ' + err.message);
 			deferred.resolve();
@@ -84,9 +75,6 @@ function create(movieParam) {
 	return deferred.promise;
 }
 
-/**
- * Function to delete movie from the DB
- */
 function _delete(_id) {
 	var deferred = Q.defer();
 	db.equipos.remove(

@@ -11,7 +11,14 @@
             })
 
             $scope.addEquipo = function(){
-            	console.log($scope);
+                var body = JSON.stringify($scope.equipo);
+                console.log($scope.equipo);
+                $http({method : 'POST',url : '/api/equipos/register',data:body})
+                .success(function(data, status) {
+                 })
+                .error(function(data, status) {
+                    alert("Error");
+                })
             }
 		}
 );
