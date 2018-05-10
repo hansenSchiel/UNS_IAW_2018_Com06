@@ -15,6 +15,7 @@
                 console.log($scope.equipo);
                 $http({method : 'POST',url : '/api/equipos/register',data:body})
                 .success(function(data, status) {
+                    window.location.replace("/equipos");
                  })
                 .error(function(data, status) {
                     alert("Error");

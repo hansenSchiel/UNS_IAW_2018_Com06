@@ -86,11 +86,10 @@
             	var body = {"fecha":fecha,"torneo":torneo};
 	        	$http({method : 'POST',url : '/api/pronosticos/register',data:body})
 	            .success(function(data, status) {
-	            	console.log(data);
 	                window.location.replace("/pronosticos");
 	             })
 	            .error(function(data, status) {
-	                alert("Error");
+	                window.location.replace("/pronosticos");
 	            })
             }
 		}

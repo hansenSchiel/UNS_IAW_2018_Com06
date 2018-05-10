@@ -15,12 +15,10 @@
                             <a class="hlink" href="/torneos/{{ torneo._id }}">{{ torneo.nombre }} <span ng-show="torneo.creando>0"> (En Edicion)</span></a>
                         </div>
                         <div class="panel-body">
-                            Equipos: 32<br>
                             Fecha Inicio: {{ torneo.inicio | date:'dd/MM/yyyy'}}<br>
                             Fecha Fin: {{ torneo.fin | date:'dd/MM/yyyy' }}<br>
                             Cant Grupos: {{ torneo.grupos.length }}<br>
                             Fechas: {{ torneo.fechas.length }}<br>
-                            Mejor Usuario: Juan<br>
                             Cant Encuentros: {{ torneo.encuentros.length }}<br>
                         </div>
                     </div>
