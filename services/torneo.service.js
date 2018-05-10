@@ -1,5 +1,5 @@
 // Config
-var config = require('config.json');
+var conf = require('config.json');
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
@@ -7,8 +7,15 @@ var Q = require('q');
 var ObjectId = require('mongodb').ObjectID;
 
 // BD
-var mongo = require('mongoskin');
-var db = mongo.db(config.connectionString, { native_parser: true });
+// BD
+//var mongo = require('mongoskin');
+//var db = mongo.db(config.connectionString, { native_parser: true });
+
+var url = 'mongodb://' + conf.dbAuthusername + ':' + conf.dbAuthpassword + '@' + conf.databaseUrl;
+var db  = require('mongoskin').db(url + '/' + conf.databaseName, {
+    auto_reconnect : true,
+    safe           : true
+});
 db.bind('torneos');
 
 // Services

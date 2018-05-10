@@ -19,7 +19,7 @@ require('./passport')(passport);
 
 app.use(cors());
 
-mongoose.connect('mongodb://localhost/iaw', 
+mongoose.connect('mongodb://hansen:hansen@ds119650.mlab.com:19650/iaw', 
   function(err, res) {
     if(err) throw err;
 });

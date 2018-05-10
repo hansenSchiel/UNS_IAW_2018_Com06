@@ -1,5 +1,8 @@
 {
-    "connectionString": "mongodb://localhost:27017/iaw",
-    "apiUrl": "http://localhost:3000",
+	"databaseUrl" : "ds119650.mlab.com:19650",
+	"databaseName": "iaw",
+	"dbAuthusername":"hansen",
+	"dbAuthpassword": "hansen",
+
     "secret": "hansen"
 }
