@@ -88,7 +88,18 @@
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+
+
+                    "laravelcollective/html": "5.2.*"
+
+                    Video Guia
+                        https://www.youtube.com/watch?v=pYNpjqVRnKc
+                    Laravel
+                        ...
+                    Laravel Collective
+                       https://laravelcollective.com/
+                       Renderizado de html
+                 </div>
             </div>
         </div>
     </body>

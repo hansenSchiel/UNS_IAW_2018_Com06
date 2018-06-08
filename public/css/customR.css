@@ -1,0 +1,39 @@
+.sidebar-collapse > .nav > li > a {
+    color: #96112b;
+}
+.navbar-inverse {
+	background-color: #96112b;
+	border-color: #F0F0F0;
+}
+
+.footer {
+    background-color:#96112b;
+}
+
+.panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #ff3030;
+    border-color: #ff3030;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #ff3030;
+    border-color: #d6001a;
+}
+a {
+    color: #ff3030;
+    text-decoration: none;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #ff6363;
+  border-color: #d6001a;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
