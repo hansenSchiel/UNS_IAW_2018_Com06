@@ -15,17 +15,23 @@ class TorneoController extends Controller
 
     }
     public function index(Request $request){
+
+
     	if($request){
     		$query = trim($request->get('searchText'));
+
+
     		$torneos = DB::table('torneos')->where('nombre','LIKE','%'.$query.'%')
     		->where('condicion','=','1')
     		->orderBy('nombre','asc')
     		->paginate(15);
 
+            $torneos = Torneo::where('condicion', 1)
+               ->orderBy('nombre', 'desc')
+               ->take(10)
+               ->get();
+
             foreach ($torneos as $key => $torneo) {
-                $torneo->grupos = [];
-                $torneo->fechas = [];
-                $torneo->encuentros = [];
             }
     		return view('torneo.index',[
     			'torneos'=>$torneos,
@@ -45,7 +51,11 @@ class TorneoController extends Controller
     	$torneo->id = str_random(32);
         $torneo->condicion = true;
     	$torneo->save();
-    	return Redirect::to('torneo');
+
+
+        return view('torneo.edit',[
+            'torneo'=>$torneo
+        ]);
     }
 
     public function show($id){

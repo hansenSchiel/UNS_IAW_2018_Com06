@@ -4,24 +4,33 @@ namespace ProdeIAW;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Equipo extends Model
+class Grupo extends Model
 {
-    protected $table 		= 'equipos';
+    protected $table 		= 'grupos';
     protected $primaryKey 	= 'id';
     public $timestamps 		= false;
     public $incrementing = false;
+
+
+
     protected $fillable		= [
     	'nombre',
     	'descripcion',
-    	'condicion'
     ];
+
+
 
     protected $guarder		= [
     ];
 
-
-    public function grupos()
+    public function torneo()
     {
-        return $this->belongsToMany('ProdeIAW\Grupo','participa');
+        return $this->belongsTo('ProdeIAW\Torneo');
+    }
+
+
+    public function equipos()
+    {
+        return $this->belongsToMany('ProdeIAW\Equipo','participa');
     }
 }

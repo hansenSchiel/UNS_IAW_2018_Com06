@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Torneo extends Model
 {
-    protected $table 		= 'torneo';
+    protected $table 		= 'torneos';
     protected $primaryKey 	= 'id';
     public $timestamps 		= false;
     public $incrementing = false;
@@ -23,4 +23,18 @@ class Torneo extends Model
 
     protected $guarder		= [
     ];
+
+
+    public function grupos()
+    {
+        return $this->hasMany('ProdeIAW\Grupo');
+    }
+    public function fechas()
+    {
+        return $this->hasMany('ProdeIAW\Fecha');
+    }
+    public function encuentros()
+    {
+        return $this->hasMany('ProdeIAW\Encuentro','torneo');
+    }
 }
