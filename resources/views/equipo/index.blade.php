@@ -5,15 +5,15 @@
         <div class="row">
             <div class="col-lg-12">
 				<h1>Equipos</h1>   
+				<a href='equipo/create'>
+					<button class="btn btn-primary">Nuevo Equipo</button>
+				</a>
             </div>
         </div>              
          <!-- /. ROW  -->
          <hr />
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
-				<a href='equipo/create'>
-					<button class="btn btn-primary">Nuevo Equipo</button>
-				</a>
 				<br>
 				@include('equipo.search')
 				<table class="table table-striped table-bordered table-hover">
@@ -32,7 +32,7 @@
 					</thead>
 					<tbody>
 						@foreach ($equipos as $index => $equipo)
-						<tr ng-repeat="equipo in equipos">
+						<tr>
 							<td>{{ $index+1 }}</td>
 							<td><a href="/equipo/equipo/{{ $equipo->id }}">{{ $equipo->nombre }}</a></td>
 							<td>2</td>
@@ -43,7 +43,6 @@
 							<td>1</td>
 							<td>
 								<a href="{{URL::action('EquipoController@edit',$equipo->id)}}">Editar</a>
-								<a href="{{URL::action('EquipoController@destroy',$equipo->id)}}">Eliminar</a>
 							</td>
 						</tr>
 						@endforeach

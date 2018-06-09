@@ -46,10 +46,10 @@
                         <a href="#" onclick="switch_style()"><i class="fa fa-exchange "></i>Cambiar estilo</a>
                     </li>
                     <li class="">
-                        <a href="/torneos" ><i class="fa fa-desktop "></i>Torneos <span class="badge">5</span></a>
+                        <a href="/torneo" ><i class="fa fa-desktop "></i>Torneos</a>
                     </li>
                     <li class="">
-                        <a href="/equipo"><i class="fa fa-table "></i>Equipos<span class="badge">5</span></a>
+                        <a href="/equipo"><i class="fa fa-table "></i>Equipos</a>
                     </li>
                 </ul>
         	</div>

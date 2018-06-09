@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('equipo','EquipoController');
+Route::resource('torneo','TorneoController');
