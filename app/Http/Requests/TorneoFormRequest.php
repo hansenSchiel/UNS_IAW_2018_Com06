@@ -27,7 +27,7 @@ class TorneoFormRequest extends FormRequest
             'nombre'=>'required|max:100',
             'fechaInicio'=>'required|date',
             'fechaFin'=>'required|date',
-            'descripcion'=>'max:512'
+            'descripcion'=>'max:512',
             'deporte'=>'required|max:32'
         ];
     }

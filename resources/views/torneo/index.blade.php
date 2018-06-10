@@ -6,7 +6,7 @@
                 <div class="col-lg-12">
                     <h2>Torneos</h2>   
 	                    <div class="col-lg-4 col-md-4">
-	                        <a href="/torneos/register" class="btn btn-primary">Nuevo Torneo</a>
+	                        <a href="/torneo/create" class="btn btn-primary">Nuevo Torneo</a>
 	                    </div>
                 </div>
             </div>              
@@ -17,7 +17,7 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <a class="hlink" href="/torneos/{{ $torneo->id }}">{{ $torneo->nombre }} <span> (En Edicion)</span></a>
+                            <a class="hlink" href="/torneo/{{ $torneo->id }}">{{ $torneo->nombre }} <span> (En Edicion)</span></a>
                         </div>
                         <div class="panel-body">
                             Fecha Inicio:  {{ $torneo->fechaInicio }}<br>

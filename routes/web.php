@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::resource('equipo','EquipoController');
 Route::resource('torneo','TorneoController');
+Route::get('back/{id}',['uses'=>'TorneoController@back']);
