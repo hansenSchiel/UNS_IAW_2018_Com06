@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Encuentro extends Model
 {
     
-    protected $table 		= 'Encuentros';
+    protected $table 		= 'encuentros';
     protected $primaryKey 	= 'id';
     public $timestamps 		= false;
     public $incrementing = false;
     protected $fillable		= [
     	'ident',
     	'dia',
+        'fecha',
     	'puntosL',
     	'puntosV'
     ];
@@ -21,16 +22,16 @@ class Encuentro extends Model
 
     public function equipoL()
     {
-        return $this->belongsTo('ProdeIAW\Equipo','equipoL');
+        return $this->belongsTo('ProdeIAW\Equipo','equipoL_id');
     }
 
     public function equipoV()
     {
-        return $this->belongsTo('ProdeIAW\Equipo','equipoV');
+        return $this->belongsTo('ProdeIAW\Equipo','equipoV_id');
     }
 
     public function torneo()
     {
-        return $this->belongsTo('ProdeIAW\Torneo','torneo');
+        return $this->belongsTo('ProdeIAW\Torneo');
     }
 }

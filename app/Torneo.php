@@ -35,6 +35,6 @@ class Torneo extends Model
     }
     public function encuentros()
     {
-        return $this->hasMany('ProdeIAW\Encuentro','torneo');
+        return $this->hasMany('ProdeIAW\Encuentro');
     }
 }

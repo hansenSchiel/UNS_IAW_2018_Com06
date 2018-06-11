@@ -73,7 +73,5 @@
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
     <script src="{{asset('js/customs.js')}}"></script>
-
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script> 
 </body>
 </html>

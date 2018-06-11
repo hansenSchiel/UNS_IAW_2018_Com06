@@ -7,6 +7,7 @@ use ProdeIAW\routes\routes;
 use ProdeIAW\Torneo;
 use ProdeIAW\Equipo;
 use ProdeIAW\Grupo;
+use ProdeIAW\Encuentro;
 use Illuminate\Support\Facades\Redirect;
 use ProdeIAW\Http\Requests\TorneoFormRequest;
 use DB;
@@ -108,33 +109,19 @@ class TorneoController extends Controller
         if($torneo->step == 2){
 
         }
-        if($torneo->step == 3){
-
-        }
     	return view('torneo.edit'.$torneo->step,$params);
     }
 
     public function update(TorneoFormRequest $request,$id){
     	$torneo = Torneo::findOrFail($id);
-        if($torneo->step == 4){
-            return Redirect::to('torneo');
-        }
 
-        if($torneo->step == 0){
-            $torneo->nombre = $request->get('nombre');
-            $torneo->descripcion = $request->get('descripcion');
-            $torneo->fechaInicio = $request->get('fechaInicio');
-            $torneo->fechaFin = $request->get('fechaFin');
-            $torneo->deporte = $request->get('deporte');
-            $torneo->descripcion = $request->get('descripcion');
-            $torneo->cantGrupos = $request->get('cantGrupos');
-            $torneo->step = 1;
-            $this->crearGrupos($torneo);
-        	$torneo->update();
+        if($torneo->step == 2){
+            return Redirect::to('torneo');
         }
         if($torneo->step == 1){
             if($request->get('siguiente')=="ok"){
                 $torneo->step = 2;
+                $this->crearEncuentros($torneo);
                 $torneo->update();
             }
             if($request->get('grupo')){
@@ -154,6 +141,18 @@ class TorneoController extends Controller
                     $grupo->equipos()->detach($equipo);
                 }
             }
+        }
+        if($torneo->step == 0){
+            $torneo->nombre = $request->get('nombre');
+            $torneo->descripcion = $request->get('descripcion');
+            $torneo->fechaInicio = $request->get('fechaInicio');
+            $torneo->fechaFin = $request->get('fechaFin');
+            $torneo->deporte = $request->get('deporte');
+            $torneo->descripcion = $request->get('descripcion');
+            $torneo->cantGrupos = $request->get('cantGrupos');
+            $torneo->step = 1;
+            $this->crearGrupos($torneo);
+            $torneo->update();
         }
         return $this->edit($torneo->id);
     }
@@ -193,6 +192,31 @@ class TorneoController extends Controller
             $grupo->torneo_id = $torneo->id;
             $grupo->id = str_random(32);
             $grupo->save();
+        }
+    }
+
+
+    public function crearEncuentros($torneo){
+        Encuentro::where('torneo_id', $torneo->id)->delete();
+
+        foreach($torneo->grupos as  $grupo){
+            foreach ($grupo->equipos as $i => $equipo1) {
+                foreach ($grupo->equipos as $j => $equipo2) {
+                    if($i<$j){
+                        $encuentro = new Encuentro;
+                        $encuentro->id = str_random(32);
+                        $encuentro->fecha = 1;
+                        $encuentro->equipoL_id = $equipo1->id;
+                        $encuentro->equipoV_id = $equipo2->id;
+                        $encuentro->torneo_id = $torneo->id;
+                        $encuentro->dia = today();
+                        $encuentro->puntosL = -1;
+                        $encuentro->puntosV = -1;
+                        $encuentro->ident = $grupo->nombre;
+                        $encuentro->save();
+                    }
+                }
+            }
         }
     }
 }
