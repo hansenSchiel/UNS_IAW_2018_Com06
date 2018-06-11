@@ -15,7 +15,8 @@ class Fecha extends Model
 
     protected $fillable		= [
     	'fechaInicio',
-    	'fechaFin'
+    	'fechaFin',
+        'nombre'
     ];
 
     public function torneo()

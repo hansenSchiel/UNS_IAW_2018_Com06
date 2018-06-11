@@ -8,6 +8,7 @@ use ProdeIAW\Torneo;
 use ProdeIAW\Equipo;
 use ProdeIAW\Grupo;
 use ProdeIAW\Encuentro;
+use ProdeIAW\Fecha;
 use Illuminate\Support\Facades\Redirect;
 use ProdeIAW\Http\Requests\TorneoFormRequest;
 use DB;
@@ -116,6 +117,7 @@ class TorneoController extends Controller
     	$torneo = Torneo::findOrFail($id);
 
         if($torneo->step == 2){
+            $this->crearFechas($torneo);
             return Redirect::to('torneo');
         }
         if($torneo->step == 1){
@@ -167,7 +169,37 @@ class TorneoController extends Controller
 
 
 
+    public function crearFechas($torneo){
+        Fecha::where('torneo_id', $torneo->id)->delete();
+        $fechas = [];
+        foreach ($torneo->encuentros as $key => $encuentro) {
+            if(!array_key_exists($encuentro->fecha ,$fechas)){
+                $fechas[$encuentro->fecha]=[];
+            }
+            $fechas[$encuentro->fecha][]=$encuentro;
+        }
 
+        foreach ($fechas as $key => $value) {
+            $fecha = new Fecha;
+            $fecha->nombre = $key;
+            $fecha->torneo_id = $torneo->id;
+            $fecha->fechaInicio = today();
+            $fecha->fechaFin = today();
+            $fecha->id = str_random(32);
+            $fecha->save();
+            foreach($value as $encuentro){
+                if($fecha->fechaInicio>$encuentro->dia){
+                    $fecha->fechaInicio = $encuentro->dia;
+                }
+                if($fecha->fechaFin<$encuentro->dia){
+                    $fecha->fechaFin = $encuentro->dia;
+                }
+                $fecha->save();
+                $encuentro->fecha_id=$fecha->id;
+                $encuentro->save();
+            }
+        }
+    }
 
 
 

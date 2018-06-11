@@ -34,4 +34,8 @@ class Encuentro extends Model
     {
         return $this->belongsTo('ProdeIAW\Torneo');
     }
+    public function fechaO()
+    {
+        return $this->belongsTo('ProdeIAW\Fecha');
+    }
 }
