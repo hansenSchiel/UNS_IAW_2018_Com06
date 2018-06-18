@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::resource('/','TorneoController');
 Route::resource('equipo','EquipoController');
 Route::resource('torneo','TorneoController');
 Route::resource('encuentro','EncuentroController');
