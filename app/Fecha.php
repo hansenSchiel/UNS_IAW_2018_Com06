@@ -30,6 +30,7 @@ class Fecha extends Model
 
     public function encuentros()
     {
-        return $this->belongsToMany('ProdeIAW\Encuentro','participa');
+        return $this->hasMany('ProdeIAW\Encuentro');
+        return $this->belongsToMany('ProdeIAW\Encuentro');
     }
 }

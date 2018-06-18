@@ -11,7 +11,7 @@ class Torneo extends Model
     public $timestamps 		= false;
     public $incrementing = false;
 
-
+    public $proxFecha = "aaa ";
     protected $fillable		= [
     	'nombre',
     	'descripcion',
@@ -37,4 +37,5 @@ class Torneo extends Model
     {
         return $this->hasMany('ProdeIAW\Encuentro');
     }
+
 }

@@ -22,7 +22,7 @@
             <div class="col-xs-12">
                 <h5>Definicion de Fechas</h5>
                 <div class="panel-group" id="accordion">
-                    @foreach($torneo->grupos as $grupo)
+                    @foreach($torneo->grupos->sortBy("nombre") as $grupo)
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">

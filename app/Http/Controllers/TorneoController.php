@@ -60,8 +60,18 @@ class TorneoController extends Controller
     }
 
     public function show($id){
+        $torneo = Torneo::findOrFail($id);
+        $fechaSig = null;
+        foreach ($torneo->fechas->sortBy('nombre') as $key => $fecha) {
+            if($fecha->fechaInicio > today()){
+                if($fechaSig == null || $fecha->fechaInicio < $fechaSig->fechaInicio){
+                    $fechaSig = $fecha;
+                }
+            }
+        }
     	return view('torneo.show',[
-    		'torneo'=>Torneo::findOrFail($id)
+    		'torneo'=> $torneo,
+            'fechaSig'=>$fechaSig
     	]);
     }
 

@@ -31,7 +31,7 @@
             </div>
         </div>
         
-        
+        @if($fechaSig != null)
         <div class="col-lg-8 col-md-8">
             <h5>Próxima Fecha</h5>
             <div class="">
@@ -45,6 +45,12 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade active in" id="info">
+
+                        Fecha:              {{ $fechaSig->nombre }}<br>
+                        Cant. encuentros:   {{ sizeOf($fechaSig->encuentros) }}<br>
+                        Usuarios partic:    3<br>
+                        Inicio Inscripcion: {{ $fechaSig->fechaInicio }}<br>
+                        Fin Incripcion:     {{ $fechaSig->fechaFin }}<br>
                     </div>
                     <div class="tab-pane fade in" id="encuentros">
                         <table class="table table-striped table-bordered table-hover">
@@ -58,8 +64,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="encuentro in proximaFecha.encuentros  track by $index">
-                                </tr>
+                                @foreach ($fechaSig->encuentros as $encuentro)
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{{ $encuentro->equipoL->nombre }}</th>
+                                        <th>vs</th>
+                                        <th>{{ $encuentro->equipoV->nombre }}</th>
+                                        <th>{{ $encuentro->dia }}</th>
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                         <% if (locals.user) {  %>
@@ -107,18 +121,20 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-4">
             <h5>Grupos y Equipos</h5>
             <div class="panel-group" id="accordion">
-                <div class="panel panel-default" ng-repeat="grupo in torneo.grupos  track by $index">
+                @foreach($torneo->grupos->sortBy("nombre") as $grupo)
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseA" class="collapsed">Grupo "A"</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $grupo->nombre }}" class="collapsed">Grupo "{{ $grupo->nombre }}"</a>
                         </h4>
                     </div>
-                    <div id="collapseA" class="panel-collapse collapse" style="height: 0px;">
+                    <div id="collapse{{ $grupo->nombre }}" class="panel-collapse collapse" style="height: 0px;">
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -132,19 +148,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="equipo in grupo.equipos  track by $index">
+                                    @foreach($grupo->equipos as $equipo)
+                                    <tr>
                                         <td>1</td>
-                                        <td><a href="/equipo/equipo.html">Equipo</a></td>
+                                        <td><a href="/equipo/equipo.html">{{ $equipo->nombre }}</a></td>
                                         <td>0</td>
                                         <td>0</td>
                                         <td>0</td>
                                         <td>0</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
         <div class="col-lg-8 col-md-8" ng-show="ultimaFecha">
