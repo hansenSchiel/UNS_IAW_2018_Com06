@@ -61,17 +61,8 @@ class TorneoController extends Controller
 
     public function show($id){
         $torneo = Torneo::findOrFail($id);
-        $fechaSig = null;
-        foreach ($torneo->fechas->sortBy('nombre') as $key => $fecha) {
-            if($fecha->fechaInicio > today()){
-                if($fechaSig == null || $fecha->fechaInicio < $fechaSig->fechaInicio){
-                    $fechaSig = $fecha;
-                }
-            }
-        }
     	return view('torneo.show',[
     		'torneo'=> $torneo,
-            'fechaSig'=>$fechaSig
     	]);
     }
 
@@ -125,7 +116,6 @@ class TorneoController extends Controller
 
     public function update(TorneoFormRequest $request,$id){
     	$torneo = Torneo::findOrFail($id);
-
         if($torneo->step == 2){
             $this->crearFechas($torneo);
             return Redirect::to('torneo');
@@ -193,21 +183,23 @@ class TorneoController extends Controller
             $fecha = new Fecha;
             $fecha->nombre = $key;
             $fecha->torneo_id = $torneo->id;
-            $fecha->fechaInicio = today();
-            $fecha->fechaFin = today();
+            $fecha->fechaInicio = null;
+            $fecha->fechaFin = null;
             $fecha->id = str_random(32);
-            $fecha->save();
             foreach($value as $encuentro){
-                if($fecha->fechaInicio>$encuentro->dia){
+                echo $encuentro->dia;
+                if($fecha->fechaInicio ===null ||$fecha->fechaInicio>$encuentro->dia){
+                    echo "OK";
                     $fecha->fechaInicio = $encuentro->dia;
                 }
-                if($fecha->fechaFin<$encuentro->dia){
+                if($fecha->fechaFin === null ||$fecha->fechaFin<$encuentro->dia){
                     $fecha->fechaFin = $encuentro->dia;
                 }
                 $fecha->save();
                 $encuentro->fecha_id=$fecha->id;
                 $encuentro->save();
             }
+            $fecha->save();
         }
     }
 
