@@ -31,6 +31,8 @@
                                 <th>#</th>
                                 <th>Local</th>
                                 <th></th>
+                                <th></th>
+                                <th></th>
                                 <th>Visitante</th>
                                 <th>Fecha</th>
                             </tr>
@@ -38,11 +40,25 @@
                         <tbody>
                             @foreach ($fecha->encuentros as $encuentro)
                                 <tr>
-                                    <th>#</th>
-                                    <th>{{ $encuentro->equipoL->nombre }}</th>
-                                    <th>vs</th>
-                                    <th>{{ $encuentro->equipoV->nombre }}</th>
-                                    <th>{{ $encuentro->dia }}</th>
+                                    <td>#</td>
+                                    <td @if($encuentro->puntosL > $encuentro->puntosV)
+                                        class="success"
+                                        @endif
+                                    >{{ $encuentro->equipoL->nombre }}</td>
+                                    @if($encuentro->puntosL >= 0)
+                                        <td>{{ $encuentro->puntosL }}</td>
+                                        <td>vs</td>
+                                        <td>{{ $encuentro->puntosV }}</td>
+                                    @else
+                                        <td>-</td>
+                                        <td>vs</td>
+                                        <td>-</td>
+                                    @endif
+                                    <td @if($encuentro->puntosL < $encuentro->puntosV)
+                                        class="success"
+                                        @endif
+                                        >{{ $encuentro->equipoV->nombre }}</td>
+                                    <td>{{ $encuentro->dia }}</td>
                                 </tr>
                             @endforeach
 
@@ -53,11 +69,11 @@
                     <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
-                            <td>#</td>
-                            <td>Nombre</td>
-                            <td>Aciertos</td>
-                            <td>Errores</td>
-                            <td>Promedio</td>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Aciertos</th>
+                            <th>Errores</th>
+                            <th>Promedio</th>
                         </tr>
                     </thead>
                     <tbody>
