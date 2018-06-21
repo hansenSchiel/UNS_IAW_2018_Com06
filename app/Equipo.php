@@ -24,4 +24,5 @@ class Equipo extends Model
     {
         return $this->belongsToMany('ProdeIAW\Grupo','participa');
     }
+
 }

@@ -4,10 +4,13 @@
 <div id="page-inner">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Torneo</h2><h4>{{ $torneo->nombre }}  <span> En Edicion</span></h4>
-                <a href="{{URL::action('TorneoController@edit',$torneo->id)}}" class="btn btn-primary">
-                    Editar
-                </a>             
+            <h2>Torneo</h2><h4>{{ $torneo->nombre }}  <span>(En Edicion)</span></h4>
+                @if (Auth::user() && Auth::user()->admin )
+                    <a href="{{URL::action('TorneoController@edit',$torneo->id)}}" class="btn btn-primary">
+                        Editar
+                    </a> 
+                @endif
+            
         </div>
     </div>              
      <!-- /. ROW  -->

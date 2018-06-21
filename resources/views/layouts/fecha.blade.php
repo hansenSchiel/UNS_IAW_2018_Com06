@@ -87,10 +87,12 @@
                 </div>
             </div>
         </div>
-        @if (today()<$fecha->fechaFin)
-            <div class="panel-footer">
-                <a href="#"  class="btn btn-primary">Participar</a>
-            </div>
+        @if (Auth::user())
+            @if (today()<$fecha->fechaFin)
+                <div class="panel-footer">
+                    <a href="#"  class="btn btn-primary">Participar</a>
+                </div>
+            @endif
         @endif
     </div>
 </div>

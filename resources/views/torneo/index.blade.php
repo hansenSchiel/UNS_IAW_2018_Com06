@@ -4,10 +4,10 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Torneos</h2>   
-	                    <div class="col-lg-4 col-md-4">
-	                        <a href="/torneo/create" class="btn btn-primary">Nuevo Torneo</a>
-	                    </div>
+                    <h2>Torneos</h2>  
+                    @if (Auth::user() && Auth::user()->admin )
+                        <a href="/torneo/create" class="btn btn-primary">Nuevo Torneo</a>
+                    @endif
                 </div>
             </div>              
              <!-- /. ROW  -->
