@@ -31,10 +31,13 @@
                     </a>
                 </div>
                 <span class="logout-spn" >
-                    <img src="<%= user.photo %>"/>
-                    <a href="/pronosticos">Usuario</a>
-                    <a href="/logout">Logout</a> 
-                    <a href="/auth/twitter" style="color:#fff;"> Login </a>
+                    @if (Auth::user())
+                        <img src="{{ Auth::user()->avatar }}"/>
+                        <a href="/pronosticos">{{ Auth::user()->name }}</a>
+                        <a href="{{ url('/logout') }}">Logout</a> 
+                    @else
+                        <a href="{{ url('/redirect') }}" style="color:#fff;"> Login </a>
+                    @endif
                 </span>
             </div>
         </div>

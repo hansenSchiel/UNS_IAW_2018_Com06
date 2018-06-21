@@ -17,3 +17,7 @@ Route::resource('equipo','EquipoController');
 Route::resource('torneo','TorneoController');
 Route::resource('encuentro','EncuentroController');
 Route::get('back/{id}',['uses'=>'TorneoController@back']);
+
+Route::get('/redirect', 'SocialAuthTwitterController@redirect');
+Route::get('/callback', 'SocialAuthTwitterController@callback');
+Route::get('/logout', 'SocialAuthTwitterController@logout');
