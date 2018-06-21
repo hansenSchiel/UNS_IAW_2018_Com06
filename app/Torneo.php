@@ -11,7 +11,6 @@ class Torneo extends Model
     public $timestamps 		= false;
     public $incrementing = false;
 
-    public $proxFecha = "aaa ";
     protected $fillable		= [
     	'nombre',
     	'descripcion',

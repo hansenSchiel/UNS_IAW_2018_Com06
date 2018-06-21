@@ -25,22 +25,62 @@
 								<th>Encuentros Ganados</th>
 								<th>Encuentros Empatados</th>
 								<th>Encuentros Perdidos</th>
+								<th>Encuentros Pendientes</th>
 								<th>Promedio</th>
-								<th>Campeón</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($equipos as $index => $equipo)
+								 @php
+								 $jugados = 0; $ganados = 0; $empatados = 0; $perdidos = 0; $promedio = 0;$pendientes = 0;
+
+                                 foreach( $equipo->encuentrosV as $encuentro){
+                                 	if($encuentro->puntosL == -1){
+                                 		$pendientes++;
+                                 	}else{
+	                     				$jugados ++; 
+	                         			if($encuentro->puntosV >$encuentro->puntosL){
+	                         				$ganados ++; 
+									 	}
+	                         			if($encuentro->puntosV <$encuentro->puntosL){
+	                         				$perdidos ++; 
+									 	}
+	                         			if($encuentro->puntosV ==$encuentro->puntosL){
+	                         				$empatados ++; 
+									 	}
+                                 	}
+								 }
+                                 foreach( $equipo->encuentrosL as $encuentro){
+                                 	if($encuentro->puntosL == -1){
+                                 		$pendientes++;
+                                 	}else{
+	                     				$jugados ++; 
+	                         			if($encuentro->puntosV <$encuentro->puntosL){
+	                         				$ganados ++; 
+									 	}
+	                         			if($encuentro->puntosV >$encuentro->puntosL){
+	                         				$perdidos ++; 
+									 	}
+	                         			if($encuentro->puntosV ==$encuentro->puntosL){
+	                         				$empatados ++; 
+									 	}
+                                 	}
+								 }
+								 @endphp
 							<tr>
 								<td>{{ $index+1 }}</td>
 								<td><a href="/equipo/equipo/{{ $equipo->id }}">{{ $equipo->nombre }}</a></td>
-								<td>2</td>
-								<td>7</td>
-								<td>2</td>
-								<td>1</td>
-								<td>0.7</td>
-								<td>1</td>
+								<td>{{ sizeOf($equipo->grupos) }}</td>
+								<td>{{ $ganados }}</td>
+								<td>{{ $empatados }}</td>
+								<td>{{ $perdidos }}</td>
+								<td>{{ $pendientes }}</td>
+								<td>@if($jugados> 0)
+									{{ ($ganados/$jugados)*100 }}
+									@else
+									0
+									@endif %</td>
 								<td>
 									@if (Auth::user() && Auth::user()->admin )
 										<a href="{{URL::action('EquipoController@edit',$equipo->id)}}">Editar</a>

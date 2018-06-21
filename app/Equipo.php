@@ -23,6 +23,14 @@ class Equipo extends Model
     public function grupos()
     {
         return $this->belongsToMany('ProdeIAW\Grupo','participa');
-    }
+    }    
+    public function encuentrosL()
+    {
+        return $this->hasMany('ProdeIAW\Encuentro','equipoL_id');
+    }  
+    public function encuentrosV()
+    {
+        return $this->hasMany('ProdeIAW\Encuentro','equipoV_id');
+    }  
 
 }

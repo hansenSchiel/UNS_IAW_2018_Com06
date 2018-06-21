@@ -15,12 +15,12 @@ class EquipoController extends Controller
 
     }
     public function index(Request $request){
-    	if($request){
-    		$query = trim($request->get('searchText'));
-    		$equipos = DB::table('equipos')->where('nombre','LIKE','%'.$query.'%')
-    		->where('condicion','=','1')
-    		->orderBy('nombre','asc')
-    		->paginate(15);
+    	if($request){        
+    		$query = trim($request->get('searchText'));    
+            $equipos = Equipo::where('condicion', 1)
+               ->where('nombre','LIKE','%'.$query.'%')
+               ->orderBy('nombre', 'asc')
+               ->paginate(15);
 
     		return view('equipo.index',[
     			'equipos'=>$equipos,
