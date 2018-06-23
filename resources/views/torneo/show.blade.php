@@ -42,7 +42,7 @@
         <div class="col-lg-8 col-md-8">
             <h5>Fechas</h5>
             <div class="panel-group" id="accordion">
-                @each('layouts/fecha', $torneo->fechas, 'fecha')
+                @each('layouts/fecha', $torneo->fechas->sortBy("nombre"), 'fecha')
             </div>
         </div>
     </div>

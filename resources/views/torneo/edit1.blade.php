@@ -36,7 +36,7 @@
             <h5>Grupos</h5>
             <div class="panel-group" id="accordion">
 
-                @foreach ($torneo->grupos as $grupo)
+                @foreach ($torneo->grupos->sortBy("nombre") as $grupo)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -65,7 +65,7 @@
         <div class="col-xs-4" >
             <h5>Equipos</h5>
             <fieldset class="form-group">
-                 @foreach ($equipos as $index => $equipo)
+                 @foreach ($equipos->sortBy("nombre") as $index => $equipo)
                 <div class="form-check">
                     <label class="form-check-label" >
                         <input onclick=" return agregarEquipo('{{$equipo->id}}')"type="submit" value="<<" class="btn btn-primary">

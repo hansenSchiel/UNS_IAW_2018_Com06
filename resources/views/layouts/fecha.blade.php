@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($fecha->encuentros as $encuentro)
+                            @foreach ($fecha->encuentros->sortBy("dia") as $encuentro)
                                 <tr>
                                     <td>#</td>
                                     <td @if($encuentro->puntosL > $encuentro->puntosV)
