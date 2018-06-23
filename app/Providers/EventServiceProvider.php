@@ -5,6 +5,14 @@ namespace ProdeIAW\Providers;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+use ProdeIAW\Torneo;
+use ProdeIAW\Observer\TorneoObserver;
+use ProdeIAW\Fecha;
+use ProdeIAW\Observer\FechaObserver;
+use ProdeIAW\Grupo;
+use ProdeIAW\Observer\GrupoObserver;
+use ProdeIAW\Participacion;
+use ProdeIAW\Observer\ParticipacionObserver;
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +33,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Torneo::observe(TorneoObserver::class);
+        Fecha::observe(FechaObserver::class);
+        Grupo::observe(GrupoObserver::class);
+        Participacion::observe(ParticipacionObserver::class);
         parent::boot();
 
         //
