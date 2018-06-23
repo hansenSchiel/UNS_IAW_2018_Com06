@@ -20,6 +20,8 @@
 					</ul>
 				</div>
 				@endif
+
+				
 				{!! Form::open(array(
 					'route'=>['torneo.update',$torneo->id],
 					'method'=>'PATCH',
@@ -60,6 +62,7 @@
 	                        <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" value="{{ $torneo->descripcion }}">
 	                    </div>
 	                    <br>
+
 	                    <input type="submit" value="Siguiente" class="btn btn-primary">
 	                </div>
 					{!! Form::close() !!}

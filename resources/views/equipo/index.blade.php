@@ -6,7 +6,7 @@
 	            <div class="col-lg-12">
 					<h1>Equipos</h1>
 	                @if (Auth::user() && Auth::user()->admin )
-	                    <a href="/equipo/create" class="btn btn-primary">Nuevo Torneo</a>
+	                    <a href="/equipo/create" class="btn btn-primary">Nuevo Equipo</a>
 	                @endif
 	            </div>
 	        </div>              

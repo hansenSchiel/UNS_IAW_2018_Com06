@@ -32,4 +32,8 @@ class Fecha extends Model
     {
         return $this->hasMany('ProdeIAW\Encuentro');
     }
+    public function participaciones()
+    {
+        return $this->hasMany('ProdeIAW\Participacion');
+    }
 }

@@ -38,4 +38,9 @@ class Encuentro extends Model
     {
         return $this->belongsTo('ProdeIAW\Fecha');
     }
+
+    public function pronosticos()
+    {
+        return $this->hasMany('ProdeIAW\Pronostico');
+    }
 }

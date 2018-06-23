@@ -104,7 +104,7 @@
             </div>
         </div>
         @if (Auth::user())
-            @if (today()<$fecha->fechaFin)
+            @if (today()<$fecha->fechaFin || true)
                 <div class="panel-footer">                
                     <a href="{{URL::action('ParticipacionController@participar',$fecha->id)}}" class="btn btn-primary">Participar</a>
                 </div>

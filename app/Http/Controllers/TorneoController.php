@@ -160,9 +160,8 @@ class TorneoController extends Controller
     }
     
     public function destroy($id){
-    	$torneo = Torneo::findOrFail($id);
-    	$torneo->condicion = 0;
-    	$torneo->update();
+        echo $id;
+    	$torneo = Torneo::findOrFail($id)->delete();
     	return Redirect::to('torneo');
     }
 
@@ -234,12 +233,13 @@ class TorneoController extends Controller
         Encuentro::where('torneo_id', $torneo->id)->delete();
 
         foreach($torneo->grupos as  $grupo){
+            $fecha = 1;
             foreach ($grupo->equipos as $i => $equipo1) {
                 foreach ($grupo->equipos as $j => $equipo2) {
                     if($i<$j){
                         $encuentro = new Encuentro;
                         $encuentro->id = str_random(32);
-                        $encuentro->fecha = 1;
+                        $encuentro->fecha = $fecha;
                         $encuentro->equipoL_id = $equipo1->id;
                         $encuentro->equipoV_id = $equipo2->id;
                         $encuentro->torneo_id = $torneo->id;
@@ -247,10 +247,49 @@ class TorneoController extends Controller
                         $encuentro->puntosL = -1;
                         $encuentro->puntosV = -1;
                         $encuentro->ident = $grupo->nombre;
+                        $fecha++;
                         $encuentro->save();
                     }
                 }
             }
         }
+    }
+
+
+
+
+    public function crearEjemplo(){
+        $torneos = Torneo::get();
+
+        $torneo = new Torneo;
+        $torneo->nombre = "Torneo Ejemplo (".sizeOf($torneos).")";
+        $torneo->deporte = "Futbol";
+        $torneo->cantGrupos = 8;
+        $torneo->fechaInicio = "15/06/18";
+        $torneo->fechaFin = "15/07/18";
+        $torneo->step = 2;
+        $torneo->descripcion = "Torneo creado automáticamente";
+        $torneo->id = str_random(32);
+        $torneo->condicion = true;
+        $torneo->save();
+        $this->crearGrupos($torneo);
+
+        $equipos = Equipo::get();
+        if (sizeOf($equipos)<32)
+            return;
+
+        $equiposP = $equipos->chunk(4);
+
+        foreach ($torneo->grupos as $key => $grupo) {
+            foreach ($equiposP[$key] as $equipo) {
+                $grupo->equipos()->attach($equipo);
+            }
+        }
+
+
+        $this->crearEncuentros($torneo);
+        $this->crearFechas($torneo);
+
+        return Redirect::to('torneo');
     }
 }

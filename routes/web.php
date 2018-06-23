@@ -19,6 +19,8 @@ Route::resource('encuentro','EncuentroController');
 Route::resource('participacion','ParticipacionController');
 
 Route::get('back/{id}',['uses'=>'TorneoController@back']);
+Route::get('crearEjemplo',['uses'=>'TorneoController@crearEjemplo']);
+
 
 Route::get('participar/{id}',['uses'=>'ParticipacionController@participar']);
 

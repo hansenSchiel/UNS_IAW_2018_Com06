@@ -37,4 +37,8 @@ class Torneo extends Model
         return $this->hasMany('ProdeIAW\Encuentro');
     }
 
+    public function delete()
+    {
+       return parent::delete();
+    }
 }

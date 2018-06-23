@@ -6,9 +6,15 @@
         <div class="col-lg-12">
             <h2>Torneo</h2><h4>{{ $torneo->nombre }}  <span>(En Edicion)</span></h4>
                 @if (Auth::user() && Auth::user()->admin )
+                    {!! Form::open(array(
+                        'route'=>['torneo.destroy',$torneo->id],
+                        'method'=>'DELETE',
+                        )) !!}
                     <a href="{{URL::action('TorneoController@edit',$torneo->id)}}" class="btn btn-primary">
                         Editar
                     </a> 
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    {!! Form::close() !!}
                 @endif
             
         </div>

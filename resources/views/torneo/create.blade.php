@@ -20,6 +20,9 @@
 					</ul>
 				</div>
 				@endif
+
+				<a href="{{URL::action('TorneoController@crearEjemplo')}}" class="btn btn-primary">Crear Ejemplo</a>
+
 				{!! Form::open(array(
 					'url'=>'torneo',
 					'method'=>'POST',
