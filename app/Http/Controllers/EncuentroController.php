@@ -31,11 +31,86 @@ class EncuentroController extends Controller
         $encuentro->update();
         $this->buscarGanador($encuentro);
         $this->crearCruces($encuentro);
+        $this->crearCruces2($encuentro);
     	return redirect()->action(
             'TorneoController@edit', ['id'=>$encuentro->torneo_id]
         );
     }
     
+    public function crearCruces2($encuentro){
+        // Si el encuentro corresponde a fase de grupos o a la final, no se ejecuta
+        if($encuentro->tipo=='G'||$encuentro->tipo=='F'){
+            return;
+        }
+
+        $torneo = $encuentro->torneo;
+
+        $encuentros = Encuentro::where('torneo_id',$torneo->id)
+                        ->where('tipo',$encuentro->tipo)
+                        ->get();
+
+        // Si hay algun partido sin resultado o empatado (no se podría), no se ejecuta
+        foreach ($encuentros as $key => $enc) {
+            if($enc->puntosL == -1 || $enc->puntosL == $enc->puntosV){
+                return;
+            }
+        }
+
+
+        // A partir de aca, asumo que se tienen los resultados de todos los encuentros de la fase
+        $faseSig = ['O'=>'C','C'=>'S','S'=>'F'];
+        $fase = $faseSig[$encuentro->tipo];
+        //Se borran todos los partidos de la fase siguiente
+        $fechaFD = Fecha::where('torneo_id',$torneo->id)
+                    ->where('tipo',$fase)
+                    ->get();
+
+        foreach ($fechaFD as $key => $value) {
+            $value->delete();
+        }
+
+        $fecha = new Fecha;
+        $fecha->nombre = sizeOf($torneo->fechas)+1;
+        $fecha->torneo_id = $torneo->id;
+        $fecha->fechaInicio = today();
+        $fecha->fechaFin = today();
+        $fecha->tipo = $fase;
+        $fecha->id = str_random(32);
+        $fecha->save();
+
+
+
+        $encs = $encuentros->sortBy('ident')->values()->all();
+
+        if($fase == 'F'){
+            $ganador1 = $encs[0]->equipoL;
+            $ganador2 = $encs[1]->equipoL;
+            $perdedor1 = $encs[0]->equipoV;
+            $perdedor2 = $encs[1]->equipoV;
+            if($encs[0]->puntosV>$encs[0]->puntosL){
+                $ganador1 = $encs[0]->equipoV;
+                $perdedor1 = $encs[0]->equipoL;
+            }
+            if($encs[1]->puntosV>$encs[1]->puntosL){
+                $ganador2 = $encs[1]->equipoV;
+                $perdedor2 = $encs[1]->equipoL;
+            }
+            $this->crearEncuentro($torneo,$fase,0,$ganador1,$ganador2,$fecha);
+            $this->crearEncuentro($torneo,$fase,1,$perdedor1,$perdedor2,$fecha);
+        }else{
+            for($i=0;$i<sizeOf($encs);$i+=4){
+                for($j=0;$j<2;$j++){
+                    $ganador1 = $encs[$i+$j]->equipoL;
+                    $ganador2 = $encs[$i+$j+2]->equipoL;
+                    if($encs[$i+$j]->puntosV>$encs[$i+$j]->puntosL)
+                        $ganador1 = $encs[$i+$j]->equipoV;
+                    if($encs[$i+$j+2]->puntosV>$encs[$i+$j+2]->puntosL)
+                        $ganador2 = $encs[$i+$j+2]->equipoV;
+                    $this->crearEncuentro($torneo,$fase,($i/2)+$j,$ganador1,$ganador2,$fecha);
+                }
+            }
+        }
+    }
     public function crearCruces($encuentro){
         //Si el encuentro no corresponde a un partido de la fase de grupos no se ejecuta
         if($encuentro->tipo!='G'){
@@ -47,7 +122,7 @@ class EncuentroController extends Controller
         $fase = $fases[$torneo->cantGrupos];
 
         $fechaFD = Fecha::where('torneo_id',$torneo->id)
-                    ->where('tipo',$fase)
+                    ->where('tipo','!=','G')
                     ->get();
 
         foreach ($fechaFD as $key => $value) {
@@ -60,23 +135,24 @@ class EncuentroController extends Controller
             }
         }
         // Obtengo los ganadores del grupo correspondiente al encuentro y al grupo contrincante
-        $grupos = $torneo->grupos->sortBy('nombre')->all();
+        $grupos = $torneo->grupos->sortBy('nombre')->values()->all();
+        $grupos = [];
+
+        $fecha = new Fecha;
+        $fecha->nombre = sizeOf($torneo->fechas)+1;
+        $fecha->torneo_id = $torneo->id;
+        $fecha->fechaInicio = today();
+        $fecha->fechaFin = today();
+        $fecha->tipo = $fase;
+        $fecha->id = str_random(32);
+        $fecha->save();
+
         for($i = 0;$i<sizeOf($grupos);$i+=2){
             $grupo1 = $grupos[$i];
             $grupo2 = $grupos[$i+1];
 
 
             // Genero los encuentros. Puede ser octavo, cuartos o semis, segun la cantidad de grupos
-            $fecha = new Fecha;
-            $fecha->nombre = sizeOf($torneo->fechas)+1;
-            $fecha->torneo_id = $torneo->id;
-            $fecha->fechaInicio = today();
-            $fecha->fechaFin = today();
-            $fecha->tipo = $fase;
-            $fecha->id = str_random(32);
-
-            $fecha->save();
-
             $gan1 = $this->getClasificados($grupo1);
             $gan2 = $this->getClasificados($grupo2);
             $this->crearEncuentro($torneo,$fase,$i,$gan1[0][0],$gan2[1][0],$fecha);
@@ -111,8 +187,11 @@ class EncuentroController extends Controller
             return $retval*-1;
         });
 
-        $fecha->user_id = $puntos[0][0]->id;
-        $fecha->update();
+
+        if(sizeOf($puntos)>0){
+            $fecha->user_id = $puntos[0][0]->id;
+            $fecha->update();
+        }
     }
 
 

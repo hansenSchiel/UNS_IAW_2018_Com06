@@ -95,7 +95,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                            @foreach($torneo->encuentros->sortBy("ident") as $encuentro)
                                                 @if($encuentro->tipo == 'O')
                                                     {!! Form::open(array(
                                                     'route'=>['encuentro.update',$encuentro->id],
@@ -145,7 +145,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                            @foreach($torneo->encuentros->sortBy("ident") as $encuentro)
                                                 @if($encuentro->tipo == 'C')
                                                     {!! Form::open(array(
                                                     'route'=>['encuentro.update',$encuentro->id],
@@ -154,14 +154,14 @@
                                                     )) !!}
                                                     {{ Form::token() }}
                                                     <tr>
-                                                        <th>{{ $encuentro->equipoL->nombre }}</th>
-                                                        <th><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></th>
-                                                        <th>vs</th>
-                                                        <th><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></th>
-                                                        <th>{{ $encuentro->equipoV->nombre }}</th>
-                                                        <th><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></th>
-                                                        <th><div class="form-group"><input type="number" name="fecha"class="form-control"  value="{{ $encuentro->fecha }}"></div></th>
-                                                        <th><input type="submit" value="ok" class="btn btn-primary"></th>
+                                                        <td>{{ $encuentro->equipoL->nombre }}</td>
+                                                        <td><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></td>
+                                                        <td>vs</td>
+                                                        <td><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></td>
+                                                        <td>{{ $encuentro->equipoV->nombre }}</td>
+                                                        <td><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></td>
+                                                        <td>{{ $encuentro->fecha }}</td>
+                                                        <td><input type="submit" value="ok" class="btn btn-primary"></td>
                                                     </tr>
                                                     {!! Form::close() !!}
                                             @endif
@@ -194,7 +194,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                        @foreach($torneo->encuentros->sortBy("ident") as $encuentro)
                                             @if($encuentro->tipo == 'S')
                                                 {!! Form::open(array(
                                                 'route'=>['encuentro.update',$encuentro->id],
@@ -242,7 +242,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                        @foreach($torneo->encuentros->sortBy("ident") as $encuentro)
                                             @if($encuentro->tipo == 'F')
                                                 {!! Form::open(array(
                                                 'route'=>['encuentro.update',$encuentro->id],

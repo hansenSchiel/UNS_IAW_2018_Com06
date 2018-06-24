@@ -4,7 +4,7 @@
 <div id="page-inner">
     <div class="row">
         <div class="col-lg-12">
-            <h2>Torneo</h2><h4>{{ $torneo->nombre }}  <span>(En Edicion)</span></h4>
+            <h2>Torneo</h2><h4>{{ $torneo->nombre }}  <span> @if ($torneo->step <2 ) (En Edicion)@endif</span></h4>
                 @if (Auth::user() && Auth::user()->admin )
                     {!! Form::open(array(
                         'route'=>['torneo.destroy',$torneo->id],

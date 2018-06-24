@@ -11,7 +11,6 @@ use ProdeIAW\Fecha;
 class TorneoObserver{
     public function deleting(Torneo $torneo)
     {
-        echo "<br>Borrando torneo ".$torneo->nombre;
         foreach ($torneo->grupos as $key => $value) {
             $value->delete();
         }

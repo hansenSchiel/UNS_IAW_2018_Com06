@@ -9,6 +9,9 @@ use ProdeIAW\Equipo;
 use ProdeIAW\Grupo;
 use ProdeIAW\Encuentro;
 use ProdeIAW\Fecha;
+use ProdeIAW\User;
+use ProdeIAW\Participacion;
+use ProdeIAW\Pronostico;
 use Illuminate\Support\Facades\Redirect;
 use ProdeIAW\Http\Requests\TorneoFormRequest;
 use DB;
@@ -316,7 +319,37 @@ class TorneoController extends Controller
 
         $this->crearEncuentros($torneo);
         $this->crearFechas($torneo);
-
+        $this->crearPredicciones($torneo);
+        $this->crearResultados($torneo);
         return Redirect::to('torneo');
+    }
+
+    public function crearPredicciones($torneo){
+        $users = User::get();
+        foreach ($torneo->fechas as $fecha) {
+            foreach ($users as $user) {
+                $participacion = new Participacion;
+                $participacion->id = str_random(32);
+                $participacion->fecha_id = $fecha->id;
+                $participacion->user_id = $user->id;
+                $participacion->save();
+                foreach ($fecha->encuentros as $encuentro) {
+                    $pronostico = new Pronostico;
+                    $pronostico->participacion_id = $participacion->id;
+                    $pronostico->ganador = rand(0,1);
+                    $pronostico->encuentro_id = $encuentro->id;
+                    $pronostico->id = str_random(32);
+                    $pronostico->save();
+                }
+            }
+        }
+    }
+    public function crearResultados($torneo){
+        $users = User::get();
+        foreach ($torneo->encuentros as $encuentro) {
+            $encuentro->puntosL = rand(0,6);
+            $encuentro->puntosV = rand(0,6);
+            $encuentro->save();
+        }
     }
 }

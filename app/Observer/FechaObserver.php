@@ -10,7 +10,6 @@ use ProdeIAW\Encuentro;
 class FechaObserver{
     public function deleting(Fecha $fecha)
     {
-        echo "<br>Borrando fecha ".$fecha->nombre;
         foreach ($fecha->encuentros as $key => $value) {
             $value->delete();
         }
