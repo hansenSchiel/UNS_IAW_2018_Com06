@@ -36,9 +36,8 @@ class Torneo extends Model
     {
         return $this->hasMany('ProdeIAW\Encuentro');
     }
-
-    public function delete()
+    public function ganador()
     {
-       return parent::delete();
+        return $this->belongsTo('ProdeIAW\Equipo','ganador_id');
     }
 }

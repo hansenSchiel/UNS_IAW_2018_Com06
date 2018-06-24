@@ -39,7 +39,19 @@ class EncuentroController extends Controller
     
     public function crearCruces2($encuentro){
         // Si el encuentro corresponde a fase de grupos o a la final, no se ejecuta
-        if($encuentro->tipo=='G'||$encuentro->tipo=='F'){
+        if($encuentro->tipo=='F'){
+            if($encuentro->ident==0){
+                $ganador = $encuentro->equipoL;
+                if($encuentro->puntosL<$encuentro->puntosV)
+                    $ganador = $encuentro->equipoV;
+                $encuentro->torneo->ganador_id = $ganador->id;
+                $encuentro->torneo->update();
+                return;
+            }else{
+                return;
+            }
+        }
+        if($encuentro->tipo=='G'){
             return;
         }
 
@@ -136,7 +148,6 @@ class EncuentroController extends Controller
         }
         // Obtengo los ganadores del grupo correspondiente al encuentro y al grupo contrincante
         $grupos = $torneo->grupos->sortBy('nombre')->values()->all();
-        $grupos = [];
 
         $fecha = new Fecha;
         $fecha->nombre = sizeOf($torneo->fechas)+1;
@@ -203,7 +214,7 @@ class EncuentroController extends Controller
         $jugados = true;
 
         foreach ($grupo->equipos as $equipo) {
-            $puntos[$equipo->id] = [$equipo,'p'=>0,'g'=>0];
+            $puntos[$equipo->id] = [$equipo,'p'=>0,'g'=>0,'pp'=>0,'pg'=>0,'pe'=>0];
         }
         foreach ($encuentros1 as $key => $encuentro) {
             if($encuentro->puntosV == -1){
@@ -213,19 +224,25 @@ class EncuentroController extends Controller
                 $puntos[$encuentro->equipoL->id]['g'] += $encuentro->puntosL-$encuentro->puntosV;
                 if($encuentro->puntosL > $encuentro->puntosV){
                     $puntos[$encuentro->equipoL->id]['p'] += 3;
+                    $puntos[$encuentro->equipoL->id]['pg'] += 1;
+                    $puntos[$encuentro->equipoV->id]['pp'] += 1;
                 }
                 if($encuentro->puntosL < $encuentro->puntosV){
                     $puntos[$encuentro->equipoV->id]['p'] += 3;
+                    $puntos[$encuentro->equipoV->id]['pg'] += 1;
+                    $puntos[$encuentro->equipoL->id]['pp'] += 1;
                 }
                 if($encuentro->puntosL == $encuentro->puntosV){
                     $puntos[$encuentro->equipoV->id]['p'] += 1;
                     $puntos[$encuentro->equipoL->id]['p'] += 1;
+                    $puntos[$encuentro->equipoL->id]['pe'] += 1;
+                    $puntos[$encuentro->equipoV->id]['pe'] += 1;
                 }
             }
         }
 
         if($jugados == false){
-            return null;
+            //return null;
         }
 
 

@@ -34,7 +34,7 @@
                     Cant Grupos: {{ sizeof($torneo->grupos) }}<br>
                     Fechas: {{ sizeOf($torneo->fechas) }}<br>
                     Cant Encuentros: {{ sizeOf($torneo->encuentros) }}<br>
-                    Mejor Usuario: Juan<br>
+                    Ganador: @if ($torneo->ganador!=null ) {{ $torneo->ganador->nombre }} @endif<br>
                     Descripcion: {{ $torneo->descripcion }}<br>
                 </div>
             </div>
@@ -47,17 +47,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-8 col-md-8">
             <h5>Grupos y Equipos</h5>
             <div class="panel-group" id="accordion">
-                @foreach($torneo->grupos->sortBy("nombre") as $grupo)
+                @foreach($grupos as $key=>$grupo)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $grupo->nombre }}" class="collapsed">Grupo "{{ $grupo->nombre }}"</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $key }}" class="collapsed">Grupo "{{ $key }}"</a>
                         </h4>
                     </div>
-                    <div id="collapse{{ $grupo->nombre }}" class="panel-collapse collapse" style="height: 0px;">
+                    <div id="collapse{{ $key }}" class="panel-collapse collapse" style="height: 0px;">
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -68,17 +68,21 @@
                                         <th>PG</th>
                                         <th>PE</th>
                                         <th>PP</th>
+                                        <th>DG</th>
+                                        <th>Puntos</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($grupo->equipos as $equipo)
+                                    @foreach($grupo as $equipo)
                                     <tr>
                                         <td>1</td>
-                                        <td>@include('layouts.links.equipo', ['item' => $equipo])</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
+                                        <td>@include('layouts.links.equipo', ['item' => $equipo[0]])</td>
+                                        <td>{{ $equipo['pg']+$equipo['pe']+$equipo['pp'] }}</td>
+                                        <td>{{ $equipo['pg'] }}</td>
+                                        <td>{{ $equipo['pe'] }}</td>
+                                        <td>{{ $equipo['pp'] }}</td>
+                                        <td>{{ $equipo['g'] }}</td>
+                                        <td>{{ $equipo['p'] }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

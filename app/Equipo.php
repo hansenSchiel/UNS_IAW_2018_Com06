@@ -32,5 +32,9 @@ class Equipo extends Model
     {
         return $this->hasMany('ProdeIAW\Encuentro','equipoV_id');
     }  
+    public function ganados()
+    {
+        return $this->hasMany('ProdeIAW\Torneo','ganador_id');
+    }
 
 }

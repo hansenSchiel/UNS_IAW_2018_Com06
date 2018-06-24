@@ -64,8 +64,16 @@ class TorneoController extends Controller
 
     public function show($id){
         $torneo = Torneo::findOrFail($id);
+        $grupos = [];
+        foreach ($torneo->grupos->sortBy('nombre') as $key => $grupo) {
+            $controler = new EncuentroController;
+            $grupos[$grupo->nombre] = $controler->getClasificados($grupo);
+        }
+
+
     	return view('torneo.show',[
     		'torneo'=> $torneo,
+            'grupos'=> $grupos,
     	]);
     }
 

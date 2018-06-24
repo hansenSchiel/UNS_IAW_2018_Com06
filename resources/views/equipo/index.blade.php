@@ -77,7 +77,7 @@
 								<td>{{ $perdidos }}</td>
 								<td>{{ $pendientes }}</td>
 								<td>@if($jugados> 0)
-									{{ ($ganados/$jugados)*100 }}
+									{{ number_format(($ganados/$jugados)*100,2) }}
 									@else
 									0
 									@endif %</td>
