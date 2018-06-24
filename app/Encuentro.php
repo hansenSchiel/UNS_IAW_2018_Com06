@@ -16,7 +16,8 @@ class Encuentro extends Model
     	'dia',
         'fecha',
     	'puntosL',
-    	'puntosV'
+    	'puntosV',
+        'tipo'
     ];
 
 

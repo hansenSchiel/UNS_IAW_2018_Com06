@@ -117,13 +117,14 @@ class TorneoController extends Controller
     public function update(TorneoFormRequest $request,$id){
     	$torneo = Torneo::findOrFail($id);
         if($torneo->step == 2){
-            $this->crearFechas($torneo);
+            $this->editarFechas($torneo);
             return Redirect::to('torneo');
         }
         if($torneo->step == 1){
             if($request->get('siguiente')=="ok"){
                 $torneo->step = 2;
                 $this->crearEncuentros($torneo);
+                $this->crearFechas($torneo);
                 $torneo->update();
             }
             if($request->get('grupo')){
@@ -166,9 +167,23 @@ class TorneoController extends Controller
     }
 
 
+    public function editarFechas($torneo){        
+        foreach ($torneo->fechas as $key => $fecha) {
+            $fecha->fechaInicio = null;
+            $fecha->fechaFin = null;
+            foreach($fecha->encuentros as $encuentro){
+                if($fecha->fechaInicio ==null ||$fecha->fechaInicio>$encuentro->dia){
+                    $fecha->fechaInicio = $encuentro->dia;
+                }
+                if($fecha->fechaFin == null ||$fecha->fechaFin<$encuentro->dia){
+                    $fecha->fechaFin = $encuentro->dia;
+                }
+            }
+            $fecha->update();
+        }
+    }
 
-
-    public function crearFechas($torneo){
+    public function crearFechas($torneo){        
         Fecha::where('torneo_id', $torneo->id)->delete();
         $fechas = [];
         foreach ($torneo->encuentros as $key => $encuentro) {
@@ -177,7 +192,6 @@ class TorneoController extends Controller
             }
             $fechas[$encuentro->fecha][]=$encuentro;
         }
-
         foreach ($fechas as $key => $value) {
             $fecha = new Fecha;
             $fecha->nombre = $key;
@@ -186,9 +200,7 @@ class TorneoController extends Controller
             $fecha->fechaFin = null;
             $fecha->id = str_random(32);
             foreach($value as $encuentro){
-                echo $encuentro->dia;
                 if($fecha->fechaInicio ===null ||$fecha->fechaInicio>$encuentro->dia){
-                    echo "OK";
                     $fecha->fechaInicio = $encuentro->dia;
                 }
                 if($fecha->fechaFin === null ||$fecha->fechaFin<$encuentro->dia){
@@ -202,6 +214,25 @@ class TorneoController extends Controller
         }
     }
 
+    function scheduler($teams){
+        if (count($teams)%2 != 0){
+            array_push($teams,null);
+        }
+        $away = array_splice($teams,(count($teams)/2));
+        $home = $teams;
+        for ($i=0; $i < count($home)+count($away)-1; $i++){
+            for ($j=0; $j<count($home); $j++){
+                $round[$i][$j]["L"]=$home[$j];
+                $round[$i][$j]["V"]=$away[$j];
+            }
+            if(count($home)+count($away)-1 > 2){
+                $a = array_splice($home,1,1);
+                array_unshift($away,array_shift($a));
+                array_push($home,array_pop($away));
+            }
+        }
+        return $round;
+    }
 
 
 
@@ -231,31 +262,27 @@ class TorneoController extends Controller
 
     public function crearEncuentros($torneo){
         Encuentro::where('torneo_id', $torneo->id)->delete();
-
         foreach($torneo->grupos as  $grupo){
-            $fecha = 1;
-            foreach ($grupo->equipos as $i => $equipo1) {
-                foreach ($grupo->equipos as $j => $equipo2) {
-                    if($i<$j){
+            $fechasF = $this->scheduler($grupo->equipos->toArray());
+            foreach($fechasF AS $round => $games){
+                foreach($games AS $play){
+                    if($play["L"]!=null && $play["V"]!=null){
                         $encuentro = new Encuentro;
                         $encuentro->id = str_random(32);
-                        $encuentro->fecha = $fecha;
-                        $encuentro->equipoL_id = $equipo1->id;
-                        $encuentro->equipoV_id = $equipo2->id;
+                        $encuentro->fecha = $round+1;
+                        $encuentro->equipoL_id = $play["L"]['id'];
+                        $encuentro->equipoV_id = $play["V"]['id'];
                         $encuentro->torneo_id = $torneo->id;
                         $encuentro->dia = today();
                         $encuentro->puntosL = -1;
                         $encuentro->puntosV = -1;
                         $encuentro->ident = $grupo->nombre;
-                        $fecha++;
                         $encuentro->save();
                     }
                 }
             }
         }
     }
-
-
 
 
     public function crearEjemplo(){

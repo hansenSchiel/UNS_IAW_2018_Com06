@@ -45,7 +45,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($torneo->encuentros as $encuentro)
+                                        @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
                                             @if($encuentro->ident == $grupo->nombre)
                                                 {!! Form::open(array(
                                                 'route'=>['encuentro.update',$encuentro->id],
@@ -54,14 +54,14 @@
                                                 )) !!}
                                                 {{ Form::token() }}
                                                 <tr>
-                                                    <th>{{ $encuentro->equipoL->nombre }}</th>
-                                                    <th><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></th>
-                                                    <th>vs</th>
-                                                    <th><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></th>
-                                                    <th>{{ $encuentro->equipoV->nombre }}</th>
-                                                    <th><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></th>
-                                                    <th><div class="form-group"><input type="number" name="fecha"class="form-control"  value="{{ $encuentro->fecha }}"></div></th>
-                                                    <th><input type="submit" value="ok" class="btn btn-primary"></th>
+                                                    <td>{{ $encuentro->equipoL->nombre }}</td>
+                                                    <td><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></td>
+                                                    <td>vs</td>
+                                                    <td><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></td>
+                                                    <td>{{ $encuentro->equipoV->nombre }}</td>
+                                                    <td><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></td>
+                                                    <td>{{ $encuentro->fecha }}</td>
+                                                    <td><input type="submit" value="ok" class="btn btn-primary"></td>
                                                 </tr>
                                                 {!! Form::close() !!}
                                         @endif
@@ -72,6 +72,202 @@
                         </div>
                     </div>
                     @endforeach
+                    @if($torneo->cantGrupos == 8)
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOctavos" class="">Octavos</a>
+                                </h4>
+                            </div>
+                            <div id="collapseOctavos" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Local</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Visitante</th>
+                                                <th>Dia</th>
+                                                <th>Fecha</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                                @if($encuentro->tipo == 'O')
+                                                    {!! Form::open(array(
+                                                    'route'=>['encuentro.update',$encuentro->id],
+                                                    'method'=>'PATCH',
+                                                    'autocomplete'=>'off'
+                                                    )) !!}
+                                                    {{ Form::token() }}
+                                                    <tr>
+                                                        <td>{{ $encuentro->equipoL->nombre }}</td>
+                                                        <td><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></td>
+                                                        <td>vs</td>
+                                                        <td><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></td>
+                                                        <td>{{ $encuentro->equipoV->nombre }}</td>
+                                                        <td><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></td>
+                                                        <td>{{ $encuentro->fecha }}</td>
+                                                        <td><input type="submit" value="ok" class="btn btn-primary"></td>
+                                                    </tr>
+                                                    {!! Form::close() !!}
+                                            @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if($torneo->cantGrupos >= 4)
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseCuartos" class="">Cuartos</a>
+                                </h4>
+                            </div>
+                            <div id="collapseCuartos" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Local</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Visitante</th>
+                                                <th>Dia</th>
+                                                <th>Fecha</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                                @if($encuentro->tipo == 'C')
+                                                    {!! Form::open(array(
+                                                    'route'=>['encuentro.update',$encuentro->id],
+                                                    'method'=>'PATCH',
+                                                    'autocomplete'=>'off'
+                                                    )) !!}
+                                                    {{ Form::token() }}
+                                                    <tr>
+                                                        <th>{{ $encuentro->equipoL->nombre }}</th>
+                                                        <th><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></th>
+                                                        <th>vs</th>
+                                                        <th><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></th>
+                                                        <th>{{ $encuentro->equipoV->nombre }}</th>
+                                                        <th><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></th>
+                                                        <th><div class="form-group"><input type="number" name="fecha"class="form-control"  value="{{ $encuentro->fecha }}"></div></th>
+                                                        <th><input type="submit" value="ok" class="btn btn-primary"></th>
+                                                    </tr>
+                                                    {!! Form::close() !!}
+                                            @endif
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSemi" class="">Semifinales</a>
+                            </h4>
+                        </div>
+                        <div id="collapseSemi" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Local</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Visitante</th>
+                                            <th>Dia</th>
+                                            <th>Fecha</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                            @if($encuentro->tipo == 'S')
+                                                {!! Form::open(array(
+                                                'route'=>['encuentro.update',$encuentro->id],
+                                                'method'=>'PATCH',
+                                                'autocomplete'=>'off'
+                                                )) !!}
+                                                {{ Form::token() }}
+                                                <tr>
+                                                    <td>{{ $encuentro->equipoL->nombre }}</td>
+                                                    <td><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></td>
+                                                    <td>vs</td>
+                                                    <td><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></td>
+                                                    <td>{{ $encuentro->equipoV->nombre }}</td>
+                                                    <td><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></td>
+                                                    <td>{{ $encuentro->fecha }}</td>
+                                                    <td><input type="submit" value="ok" class="btn btn-primary"></td>
+                                                </tr>
+                                                {!! Form::close() !!}
+                                        @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFinales" class="">Finales</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFinales" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Local</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Visitante</th>
+                                            <th>Dia</th>
+                                            <th>Fecha</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($torneo->encuentros->sortBy("fecha") as $encuentro)
+                                            @if($encuentro->tipo == 'F')
+                                                {!! Form::open(array(
+                                                'route'=>['encuentro.update',$encuentro->id],
+                                                'method'=>'PATCH',
+                                                'autocomplete'=>'off'
+                                                )) !!}
+                                                {{ Form::token() }}
+                                                <tr>
+                                                    <td>{{ $encuentro->equipoL->nombre }}</td>
+                                                    <td><div class="form-group"><input type="number" name="puntosL"class="form-control"  value="{{ $encuentro->puntosL }}"></div></td>
+                                                    <td>vs</td>
+                                                    <td><div class="form-group"><input type="number" name="puntosV" class="form-control"  value="{{ $encuentro->puntosV }}"></div></td>
+                                                    <td>{{ $encuentro->equipoV->nombre }}</td>
+                                                    <td><div class="form-group"><input type="date" name="dia"class="form-control"  value="{{ $encuentro->dia }}"></div></td>
+                                                    <td>{{ $encuentro->fecha }}</td>
+                                                    <td><input type="submit" value="ok" class="btn btn-primary"></td>
+                                                </tr>
+                                                {!! Form::close() !!}
+                                        @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {!! Form::open(array(
                 'route'=>['torneo.update',$torneo->id],
