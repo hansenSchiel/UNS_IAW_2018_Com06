@@ -45,7 +45,7 @@
                                     <td @if($encuentro->puntosL > $encuentro->puntosV)
                                         class="success"
                                         @endif
-                                    >{{ $encuentro->equipoL->nombre }}</td>
+                                    >@include('layouts.links.equipo', ['item' => $encuentro->equipoL])</td>
                                     @if($encuentro->puntosL >= 0)
                                         <td>{{ $encuentro->puntosL }}</td>
                                         <td>vs</td>
@@ -58,7 +58,7 @@
                                     <td @if($encuentro->puntosL < $encuentro->puntosV)
                                         class="success"
                                         @endif
-                                        >{{ $encuentro->equipoV->nombre }}</td>
+                                        >@include('layouts.links.equipo', ['item' => $encuentro->equipoV])</td>
                                     <td>{{ $encuentro->dia }}</td>
                                 </tr>
                             @endforeach
@@ -80,7 +80,7 @@
                         @foreach($fecha->participaciones as $key => $participacion)
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $participacion->user->name }}</td>
+                            <td>@include('layouts.links.user', ['item' => $participacion->user])</td>
                             <td>{{ $participacion->updated_at }}</td>
                             <td>
                                 <a type="button" role="button" class="btn btn-sm btn-btn btn-primary" data-toggle="popover" data-placement="left" title="Pronostico" data-html = true data-content="

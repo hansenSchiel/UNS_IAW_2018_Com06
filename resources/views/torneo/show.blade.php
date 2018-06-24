@@ -74,7 +74,7 @@
                                     @foreach($grupo->equipos as $equipo)
                                     <tr>
                                         <td>1</td>
-                                        <td><a href="/equipo/equipo.html">{{ $equipo->nombre }}</a></td>
+                                        <td>@include('layouts.links.equipo', ['item' => $equipo])</td>
                                         <td>0</td>
                                         <td>0</td>
                                         <td>0</td>

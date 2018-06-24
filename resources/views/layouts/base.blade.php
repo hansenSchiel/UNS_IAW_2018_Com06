@@ -33,7 +33,7 @@
                 <span class="logout-spn" >
                     @if (Auth::user())
                         <img src="{{ Auth::user()->avatar }}"/>
-                        <a href="/pronosticos">{{ Auth::user()->name }}</a>
+                        @include('layouts.links.user', ['item' => Auth::user()])
                         <a href="{{ url('/logout') }}">Logout</a> 
                     @else
                         <a href="{{ url('/redirect') }}" style="color:#fff;"> Login </a>

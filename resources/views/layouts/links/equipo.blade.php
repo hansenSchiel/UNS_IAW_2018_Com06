@@ -1,0 +1,1 @@
+<a href="/equipo/{{ $item->id }}">{{ $item->nombre }}</a>

@@ -70,7 +70,7 @@
 								 @endphp
 							<tr>
 								<td>{{ $index+1 }}</td>
-								<td><a href="/equipo/equipo/{{ $equipo->id }}">{{ $equipo->nombre }}</a></td>
+								<td>@include('layouts.links.equipo', ['item' => $equipo])</td>
 								<td>{{ sizeOf($equipo->grupos) }}</td>
 								<td>{{ $ganados }}</td>
 								<td>{{ $empatados }}</td>
