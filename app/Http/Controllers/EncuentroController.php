@@ -29,6 +29,7 @@ class EncuentroController extends Controller
         $encuentro->dia = $request->get('dia');
         //$encuentro->fecha = $request->get('fecha');
         $encuentro->update();
+        $this->buscarGanador($encuentro);
         $this->crearCruces($encuentro);
     	return redirect()->action(
             'TorneoController@edit', ['id'=>$encuentro->torneo_id]
@@ -83,7 +84,36 @@ class EncuentroController extends Controller
         }
     }
 
+    public function buscarGanador($enc){
+        $fecha = $enc->fechaO;
+        $puntos = [];
+        foreach ($fecha->participaciones as $participacion) {
+            $puntos[$participacion->user->id] = [$participacion->user,'e'=>$participacion,'p'=>0];
+        }
+        foreach($fecha->encuentros as $encuentro){
+            if($encuentro->puntosV == -1){
+                return;
+            }else{
+                foreach ($encuentro->pronosticos as $pronostico) {
+                    if(($pronostico->ganador == 0 && $encuentro->puntosL > $encuentro->puntosV)||
+                        ($pronostico->ganador == 1 && $encuentro->puntosL < $encuentro->puntosV)){
+                        $puntos[$pronostico->participacion->user->id]['p'] += 1;
+                    }
+                }
+            }
+        }  
 
+        usort($puntos, function($a,$b){
+            $retval = $a['p'] <=> $b['p'];
+            if ($retval == 0) {
+                $retval = ($a['e']->updated_at <=> $b['e']->updated_at)*-1;
+            }
+            return $retval*-1;
+        });
+
+        $fecha->user_id = $puntos[0][0]->id;
+        $fecha->update();
+    }
 
 
     public function getClasificados($grupo){

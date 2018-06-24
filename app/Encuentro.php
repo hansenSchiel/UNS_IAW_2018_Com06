@@ -37,7 +37,7 @@ class Encuentro extends Model
     }
     public function fechaO()
     {
-        return $this->belongsTo('ProdeIAW\Fecha');
+        return $this->belongsTo('ProdeIAW\Fecha','fecha_id');
     }
 
     public function pronosticos()

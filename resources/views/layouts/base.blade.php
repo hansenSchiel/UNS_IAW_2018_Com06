@@ -76,5 +76,8 @@
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
     <script src="{{asset('js/customs.js')}}"></script>
+    <script type="text/javascript">
+        $('[data-toggle="popover"]').popover()
+    </script>
 </body>
 </html>

@@ -8,7 +8,6 @@ class Pronostico extends Model
 {
     protected $table 		= 'pronostico';
     protected $primaryKey 	= 'id';
-    public $timestamps 		= false;
     public $incrementing = false;
 
 

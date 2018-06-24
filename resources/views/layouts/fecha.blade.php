@@ -19,16 +19,18 @@
 
                     Fecha:              {{ $fecha->nombre }}<br>
                     Cant. encuentros:   {{ sizeOf($fecha->encuentros) }}<br>
-                    Usuarios partic:    3<br>
+                    Usuarios partic:    {{ sizeOf($fecha->participaciones) }}<br>
                     Inicio:             {{ $fecha->fechaInicio }}<br>
                     Fin:                {{ $fecha->fechaFin }}<br>
                     Fin Inscripcion:    {{ date('Y-m-d', strtotime($fecha->fechaInicio.' -1 days')) }}<br>
+                    @if($fecha->ganador != null)
+                        Ganador: {{ $fecha->ganador->name}}<br>
+                    @endif
                 </div>
                 <div class="tab-pane fade in" id="encuentros{{ $fecha->nombre }}">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Local</th>
                                 <th></th>
                                 <th></th>
@@ -40,7 +42,6 @@
                         <tbody>
                             @foreach ($fecha->encuentros->sortBy("dia") as $encuentro)
                                 <tr>
-                                    <td>#</td>
                                     <td @if($encuentro->puntosL > $encuentro->puntosV)
                                         class="success"
                                         @endif
@@ -71,33 +72,31 @@
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
-                            <th>Aciertos</th>
-                            <th>Errores</th>
-                            <th>Promedio</th>
+                            <th>Fecha</th>
+                            <th>Pronostico</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($fecha->participaciones as $key => $participacion)
                         <tr>
-                            <td>#</td>
-                            <td><a href="/usuario/usuario.html">Juan</a></td>
-                            <td>15</td>
-                            <td>9</td>
-                            <td>0.625</td>
+                            <td>{{ $key+1 }}</td>
+                            <td>{{ $participacion->user->name }}</td>
+                            <td>{{ $participacion->updated_at }}</td>
+                            <td>
+                                <a type="button" role="button" class="btn btn-sm btn-btn btn-primary" data-toggle="popover" data-placement="left" title="Pronostico" data-html = true data-content="
+                                @foreach($participacion->pronosticos as $pronostico)
+                                    @if($pronostico->ganador == 0)
+                                        <b>{{ $pronostico->encuentro->equipoL->nombre }}</b> - {{ $pronostico->encuentro->equipoV->nombre }}
+                                    @else
+                                        {{ $pronostico->encuentro->equipoL->nombre }} - <b>{{ $pronostico->encuentro->equipoV->nombre }}</b>
+                                    @endif
+                                    <br>
+                                @endforeach
+                                ">Pronostico</a>
+                            </td>
                         </tr>
                         <tr>
-                            <td>#</td>
-                            <td><a href="/usuario/usuario.html">Matias</a></td>
-                            <td>4</td>
-                            <td>1</td>
-                            <td>0.8</td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td><a href="/usuario/usuario.html">Roberto</a></td>
-                            <td>31</td>
-                            <td>12</td>
-                            <td>0.72</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                     </table>
                 </div>

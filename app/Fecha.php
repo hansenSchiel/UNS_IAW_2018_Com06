@@ -26,7 +26,7 @@ class Fecha extends Model
     }
     public function ganador()
     {
-        return $this->belongsTo('ProdeIAW\User');
+        return $this->belongsTo('ProdeIAW\User','user_id');
     }
 
     public function encuentros()

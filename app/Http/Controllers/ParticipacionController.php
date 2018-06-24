@@ -27,6 +27,7 @@ class ParticipacionController extends Controller
 		    $pronostico = Pronostico::findOrFail($key);
 		    $pronostico->ganador = $ganador;
 		    $pronostico->save();
+		    $pronostico->participacion->touch();
 		}
     	return $this->show($id);
     }

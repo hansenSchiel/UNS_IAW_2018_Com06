@@ -9,7 +9,7 @@ class Participacion extends Model
     
     protected $table 		= 'participacion';
     protected $primaryKey 	= 'id';
-    public $timestamps 		= false;
+    public $timestamps 		= true;
     public $incrementing = false;
 
 
