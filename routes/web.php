@@ -28,4 +28,5 @@ Route::get('/redirect', 'SocialAuthTwitterController@redirect');
 Route::get('/callback', 'SocialAuthTwitterController@callback');
 Route::get('/logout', 'SocialAuthTwitterController@logout');
 
-Route::get('/readme', 'Controller@show');
+Route::get('/readme', 'GeneralController@readme');
+Route::get('/user/{id}', 'GeneralController@show');
