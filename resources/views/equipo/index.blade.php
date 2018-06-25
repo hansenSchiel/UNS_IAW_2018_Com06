@@ -76,11 +76,8 @@
 								<td>{{ $empatados }}</td>
 								<td>{{ $perdidos }}</td>
 								<td>{{ $pendientes }}</td>
-								<td>@if($jugados> 0)
-									{{ number_format(($ganados/$jugados)*100,2) }}
-									@else
-									0
-									@endif %</td>
+
+								<td>@if($jugados> 0) {{ number_format((($ganados*3+$empatados)/$jugados),2) }} @else 0 @endif</td>
 								<td>
 									@if (Auth::user() && Auth::user()->admin )
 										<a href="{{URL::action('EquipoController@edit',$equipo->id)}}">Editar</a>

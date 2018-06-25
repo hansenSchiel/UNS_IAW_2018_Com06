@@ -25,6 +25,7 @@
                             Cant Grupos: {{ sizeof($torneo->grupos) }}<br>
                             Fechas: {{ sizeOf($torneo->fechas) }}<br>
                             Cant Encuentros: {{ sizeOf($torneo->encuentros) }}<br>
+                            Ganador: @if ($torneo->ganador!=null )@include('layouts.links.equipo', ['item' => $torneo->ganador])@endif<br>
                         </div>
                     </div>
                 </div>

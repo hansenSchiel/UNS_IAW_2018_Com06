@@ -1,0 +1,1 @@
+<a href="/torneo/{{ $item->id }}">{{ $item->nombre }}</a>
