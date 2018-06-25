@@ -27,3 +27,5 @@ Route::get('participar/{id}',['uses'=>'ParticipacionController@participar']);
 Route::get('/redirect', 'SocialAuthTwitterController@redirect');
 Route::get('/callback', 'SocialAuthTwitterController@callback');
 Route::get('/logout', 'SocialAuthTwitterController@logout');
+
+Route::get('/readme', 'Controller@show');
