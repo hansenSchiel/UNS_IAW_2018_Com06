@@ -11,25 +11,58 @@
      <!-- /. ROW  -->
      <hr />
     <div class="row">
-        <div class="col-lg-12">
+    	@foreach($user->participaciones->sortBy('created_at') as $participacion)
+        <div class="col-lg-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Librerias
+                    {{ $participacion->fecha->torneo->nombre }} - Fecha {{ $participacion->fecha->nombre }}
                 </div>
                 <div class="panel-body">
-                    <a href="https://laravel.com/docs/5.6" target="_blank">
-                        Info general de Lavavel
-                    </a><br>
-                    <a href="https://www.youtube.com/watch?v=Zj0pshSSlEo" target="_blank">
-                        Video curso Laravel con mysql
-                    </a><br>
-                    
-                    <a href="https://appdividend.com/2017/07/21/laravel-5-twitter-login/" target="_blank">
-                    Login con twitter
-                    </a><br>
+                	<table class="table table-striped table-bordered table-hover">
+                		<thead>
+                			<tr>
+                				<th>#</th>
+                				<th>Local</th>
+                				<th></th>
+                				<th>-</th>
+                				<th></th>
+                				<th>Visitante</th>
+                				<th>Prediccion</th>
+            				</tr>
+                		</thead>
+                		<tbody>
+                			@foreach($participacion->pronosticos as $key => $pronostico)
+                				@php
+                				$class = "";
+                				if($pronostico->encuentro->puntosL > $pronostico->encuentro->puntosV){
+                					if($pronostico->ganador==0)
+                						$class = "success";
+                					else
+                						$class = "danger";
+                				}
+                				if($pronostico->encuentro->puntosL < $pronostico->encuentro->puntosV){
+                					if($pronostico->ganador==1)
+                						$class = "success";
+	            					else
+	            						$class = "danger";
+	        					}
+            					@endphp
+                			<tr class="{{ $class }}">
+            					<td>{{ $key }}</td>
+            					<td>{{ $pronostico->encuentro->equipoL->nombre }}</td>
+            					<td>{{ $pronostico->encuentro->puntosL }}</td>
+            					<td>vs</td>
+            					<td>{{ $pronostico->encuentro->puntosV }}</td>
+            					<td>{{ $pronostico->encuentro->equipoV->nombre }}</td>
+            					<td>@if ($pronostico->ganador == 0){{ $pronostico->encuentro->equipoL->nombre }}@else {{ $pronostico->encuentro->equipoV->nombre }}@endif</td>
+                			</tr>
+                			@endforeach
+                		</tbody>
+                	</table>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 @endsection
