@@ -1,1 +1,1 @@
-web: vendor/bin/ProdeIAW public/
+web: /heroku-php-apache2 public/
