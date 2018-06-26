@@ -13,12 +13,12 @@
     <div class="row">
     	@foreach($user->participaciones->sortBy('created_at') as $participacion)
         <div class="col-lg-6">
-            <div class="panel panel-primary">
+            <div class="panel panel-default ">
                 <div class="panel-heading">
-                    {{ $participacion->fecha->torneo->nombre }} - Fecha {{ $participacion->fecha->nombre }}
+                    @include('layouts.links.torneo', ['item' => $participacion->fecha->torneo]) - Fecha {{ $participacion->fecha->nombre }}
                 </div>
-                <div class="panel-body">
-                	<table class="table table-striped table-bordered table-hover">
+                <div class="panel-body cpanel-fixed">
+                	<table class="table table-striped table-bordered table-hover ">
                 		<thead>
                 			<tr>
                 				<th>#</th>
@@ -47,15 +47,17 @@
 	            						$class = "danger";
 	        					}
             					@endphp
+            				@if ($pronostico->encuentro->puntosL>-1)
                 			<tr class="{{ $class }}">
             					<td>{{ $key }}</td>
-            					<td>{{ $pronostico->encuentro->equipoL->nombre }}</td>
+            					<td>@include('layouts.links.equipo', ['item' => $pronostico->encuentro->equipoL])</td>
             					<td>{{ $pronostico->encuentro->puntosL }}</td>
             					<td>vs</td>
             					<td>{{ $pronostico->encuentro->puntosV }}</td>
-            					<td>{{ $pronostico->encuentro->equipoV->nombre }}</td>
+            					<td>@include('layouts.links.equipo', ['item' => $pronostico->encuentro->equipoV])</td>
             					<td>@if ($pronostico->ganador == 0){{ $pronostico->encuentro->equipoL->nombre }}@else {{ $pronostico->encuentro->equipoV->nombre }}@endif</td>
                 			</tr>
+                			@endif
                 			@endforeach
                 		</tbody>
                 	</table>

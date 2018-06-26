@@ -27,7 +27,7 @@
                         Ganador: {{ $fecha->ganador->name}}<br>
                     @endif
                 </div>
-                <div class="tab-pane fade in" id="encuentros{{ $fecha->nombre }}">
+                <div class="tab-pane fade in cpanel" id="encuentros{{ $fecha->nombre }}">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
@@ -66,7 +66,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade in" id="usuarios{{ $fecha->nombre }}">
+                <div class="tab-pane fade in cpanel" id="usuarios{{ $fecha->nombre }}">
                     <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>

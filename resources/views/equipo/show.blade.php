@@ -11,7 +11,7 @@
      <hr />
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-8">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary cpanel">
                 <div class="panel-heading">
                     Informacion
                 </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="col-lg-8 col-md-12 col-sm-12">
-        	<div class="panel panel-primary">
+        	<div class="panel panel-primary cpanel">
                 <div class="panel-heading">
                     Pronosticos
                 </div>
@@ -134,7 +134,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary cpanel">
                 <div class="panel-heading">
                     Encuentros
                 </div>

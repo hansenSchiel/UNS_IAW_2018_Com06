@@ -128,3 +128,11 @@ body {
 
  
 }
+.cpanel{
+    max-height: 300px;
+    overflow-y: auto;
+}
+.cpanel-fixed{
+    height: 300px;
+    overflow-y: auto;
+}
